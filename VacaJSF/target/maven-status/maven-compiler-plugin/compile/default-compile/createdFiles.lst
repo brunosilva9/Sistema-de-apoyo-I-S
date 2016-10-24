@@ -1,0 +1,7 @@
+cl\revengers\backbeans\LoginBean.class
+cl\revengers\sb\LoginFacadeLocal.class
+cl\revengers\sb\LoginFacade.class
+cl\revengers\entities\Login_.class
+cl\revengers\sb\AbstractFacade.class
+cl\revengers\utils\Constantes.class
+cl\revengers\entities\Login.class
