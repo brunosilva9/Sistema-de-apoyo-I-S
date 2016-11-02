@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Sistema IS</title>
+        <!--Es importante que estos CSS sean cargados despues de los css propios de Primefaces, es por esto que va el facet 'last'-->
+        <f:facet name="last">
+            <style type='text/css'>
+                .ui-layout-north {
+                    z-index:20 !important;
+                    overflow:visible !important;
+                    font-family: Verdana, Arial, Helvetica, sans-serif;
+                    font-size: 11px!important;
+                }
+
+                .ui-layout-north .ui-layout-unit-content {
+                    overflow:visible !important;
+                    font-family: Verdana, Arial, Helvetica, sans-serif;
+                    font-size: 11px!important;
+                }
+
+                .ui-layout-south {
+                    font-family: Verdana, Arial, Helvetica, sans-serif;
+                    font-size: 11px!important;
+                }
+
+                .ui-layout-south .ui-layout-unit-content {
+                    font-family: Verdana, Arial, Helvetica, sans-serif;
+                    font-size: 11px!important;
+                }
+
+                .ui-layout-west {
+                    font-family: Verdana, Arial, Helvetica, sans-serif;
+                    font-size: 11px!important;
+                }
+
+                .ui-layout-west .ui-layout-unit-content {
+                    font-family: Verdana, Arial, Helvetica, sans-serif;
+                    font-size: 11px!important;
+                }
+
+                .ui-layout-east {
+                    font-family: Verdana, Arial, Helvetica, sans-serif;
+                    font-size: 11px!important;
+                }
+
+                .ui-layout-east .ui-layout-unit-content {
+                    font-family: Verdana, Arial, Helvetica, sans-serif;
+                    font-size: 11px!important;
+                }
+
+                .ui-menubar {
+                    font-family: Verdana, Arial, Helvetica, sans-serif;
+                    font-size: 11px!important;
+
+                }
+                
+                .ui-growl-title {
+                    font-family: Verdana, Arial, Helvetica, sans-serif;
+                    font-size: 11px!important;
+                }
+                
+                .ui-growl-message p {
+                    font-family: Verdana, Arial, Helvetica, sans-serif;
+                    font-size: 11px!important;
+                }
+            </style>
+        </f:facet>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:growl id="messages" showDetail="false" sticky="false" life="5000" />
+            <p:layout fullPage="true">
+                <p:layoutUnit position="north" size="50" resizable="false" closable="false" collapsible="false">
+                    <ui:include src="/templates/header.xhtml"/>
+                </p:layoutUnit>
+                <p:layoutUnit position="south" size="100" resizable="false" closable="false" collapsible="false">
+                    <ui:include src="/templates/footer.xhtml"/>
+                </p:layoutUnit>
+                <p:layoutUnit position="west" size="200" header="Left" resizable="true" closable="true" collapsible="true">
+                    <h:outputText value="Definir si irá algo en este sector, si no, quitar." />
+                </p:layoutUnit>
+                <p:layoutUnit position="east" size="200" header="Right" resizable="true" closable="true" collapsible="true" effect="drop">
+                    <h:outputText value="Definir si irá algo en este sector, si no, quitar." />
+                </p:layoutUnit>
+                <p:layoutUnit position="center">
+                    <ui:insert name="content" >
+                    </ui:insert>
+                </p:layoutUnit>
+            </p:layout> 
+        </h:form>
+    </h:body>
+</html>

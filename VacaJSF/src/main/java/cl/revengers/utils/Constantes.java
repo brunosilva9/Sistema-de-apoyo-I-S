@@ -12,4 +12,6 @@ package cl.revengers.utils;
 public class Constantes {
     
     public static final String PU_NAME = "cl.duoc_VacaJSF_war_1.0-SNAPSHOTPU";
+    public static final String ESTADO_NO_PAGADO = "no pagado";
+    public static final String ESTADO_PAGADO = "pagado";
 }

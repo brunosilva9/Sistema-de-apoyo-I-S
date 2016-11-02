@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -18,6 +19,8 @@ import javax.persistence.Query;
  */
 @Stateless 
 public class LoginFacade extends AbstractFacade<Login> implements LoginFacadeLocal {
+    
+    private final static Logger logger = Logger.getLogger(LoginFacade.class);
 
     @PersistenceContext(unitName = "cl.duoc_VacaJSF_war_1.0-SNAPSHOTPU")
     private EntityManager em;
@@ -42,6 +45,7 @@ public class LoginFacade extends AbstractFacade<Login> implements LoginFacadeLoc
         }catch(NoResultException ex){
             return null;
         }catch(Exception e){
+            logger.error("Error grave obteniendo login por rut.", e);
             throw new RuntimeException(e);
         }
     }

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>
+        <ui:composition template="/templates/commonTemplate.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <p:growl id="messages" showDetail="false" sticky="false" life="5000" />
+                    <p:panel id="panel1" header="Búsqueda de Trabajadores" style="margin-bottom:20px;font-size: 11px!important;font-family: Verdana, Arial, Helvetica, sans-serif;">
+                        <h:panelGrid columns="4" cellpadding="10">
+                            <h:outputText value="Rut Trabajador"/>
+                            <p:inputText id="txtRut" value="#{pagosBean.rutBusqueda}" maxlength="8" required="true" requiredMessage="El Rut es requerido."/> 
+                            <p:inputText id="txtDv" value="#{pagosBean.dvBusqueda}" style="width: 20px" maxlength="1" required="true" requiredMessage="El Dv del Rut es requerido."/>
+                            <p:commandButton value="Buscar" id="btnBuscar" actionListener="#{pagosBean.listarTrabajos}" update="tabTrabajos,messages"/>
+                        </h:panelGrid>
+                        <h:panelGrid columns="1" cellpadding="10">
+                            <p:dataTable id="tabTrabajos" var="trab" value="#{pagosBean.listaResumenes}" rowKey="#{trab.idResumenTrabajo}"
+                                         selection="#{pagosBean.resumenesSeleccionados}" selectionMode="multiple" emptyMessage="No existen trabajadores para listar" paginator="true" >
+                                <f:facet name="header">
+                                    Lista Trabajadores
+                                </f:facet>
+                                <p:column headerText="ID Trabajador">
+                                    <h:outputText value="#{trab.idTrabajador}" />
+                                </p:column>
+                                <p:column headerText="Nombre Trabajador">
+                                    <h:outputText value="#{trab.nombreTrabajador} #{trab.apellidoP} #{trab.apellidoM}" />
+                                </p:column>
+                                <p:column headerText="Rut">
+                                    <h:outputText value="#{trab.rut}" />
+                                </p:column>
+                                <p:column headerText="Fecha Trabajo">
+                                    <h:outputText value="#{trab.fechaFormateadaTrabajo}" />
+                                </p:column>
+                                <p:column headerText="Total a Pagar">
+                                    <h:outputText value="#{trab.totalPagar}" />
+                                </p:column>
+                            </p:dataTable> 
+                        </h:panelGrid>
+                        <h:panelGrid>
+                            <p:commandButton value="Realizar Pagos" actionListener="#{pagosBean.actualizarPagoResumen}" update="messages, tabTrabajos" style="margin-right: 20px" icon="fa fa-money">
+                                <p:confirm header="Confirmación" message="¿Está seguro que desea actualizar estos resumenes a estado Pagado?" icon="ui-icon-alert" />
+                            </p:commandButton>
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" style="margin-bottom:20px;font-size: 11px!important;font-family: Verdana, Arial, Helvetica, sans-serif;">
+                                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                        </h:panelGrid>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
