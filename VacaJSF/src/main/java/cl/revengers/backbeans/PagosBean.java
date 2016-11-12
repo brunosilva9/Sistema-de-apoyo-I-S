@@ -24,7 +24,7 @@ import org.apache.log4j.Logger;
 
 /**
  *
- * @author Esteban Perez
+
  */
 @Named(value = "pagosBean")
 @ViewScoped

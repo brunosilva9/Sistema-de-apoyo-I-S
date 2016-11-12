@@ -20,7 +20,7 @@ import org.primefaces.context.RequestContext;
 
 /**
  *
- * @author Esteban Perez
+
  */
 @Named(value = "loginBean")
 /*  aki llega todo */
@@ -88,7 +88,7 @@ y los objetos que viven dentro de el puedan enviarse por bytes y reconstruirse e
             Login log = loginFacade.getLogin(this.getUsername().trim(), this.getPassword().trim());
 
             /*
-            * Esteban Perez INNOVA-TI
+           
             * Dejaremos el usuario sesionado en esta variable para poder acceder a este desde otros bean
              */
             this.setUsuarioSessionado(log);
