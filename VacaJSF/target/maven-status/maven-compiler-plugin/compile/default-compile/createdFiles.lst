@@ -1,5 +1,6 @@
 cl\revengers\backbeans\LoginBean.class
 cl\revengers\entities\Adelanto_.class
+cl\revengers\sb\TrabajadorFacadeLocal.class
 cl\revengers\entities\ResumenProductos.class
 cl\revengers\sb\ResumenTrabajoFacade.class
 cl\revengers\entities\Trabajador.class
@@ -10,14 +11,13 @@ cl\revengers\entities\Login.class
 cl\revengers\entities\Trabajador_.class
 cl\revengers\entities\Producto_.class
 cl\revengers\entities\ResumenTrabajo_.class
-SelectOneMenuView.class
 cl\revengers\entities\Faena_.class
 cl\revengers\entities\Producto.class
 cl\revengers\entities\Implemento_.class
 cl\revengers\entities\DiaTrabajo_.class
 cl\revengers\sb\LoginFacadeLocal.class
-ValidationView.class
 cl\revengers\entities\Prestamo_.class
+cl\revengers\sb\TrabajadorFacade.class
 cl\revengers\vo\ResumenTrabajoVO.class
 cl\revengers\entities\Login_.class
 cl\revengers\utils\Constantes.class
@@ -26,7 +26,6 @@ cl\revengers\entities\Faena.class
 cl\revengers\entities\Cliente.class
 cl\revengers\entities\Cliente_.class
 cl\revengers\sb\LoginFacade.class
-MessagesView.class
 cl\revengers\entities\Prestamo.class
 cl\revengers\entities\DiaTrabajo.class
 cl\revengers\entities\ResumenTrabajo.class
