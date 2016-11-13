@@ -3,80 +3,50 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-          
+
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:body>
         <ui:composition template="/templates/commonTemplate.xhtml">
             <ui:define name="content">
                 <h:form>
-                    <p:panel header="Validate">
-                        <p:messages autoUpdate="true"/>
-
-                        <h:panelGrid id="grid" columns="4"  cellpadding="5">
+                    <p:growl id="messages" showDetail="false" sticky="false" life="5000" />
+                    <p:panel header="Ingreso nuevo trabajador" style="margin-bottom:20px;font-size: 11px!important;font-family: Verdana, Arial, Helvetica, sans-serif;">
+                        <h:panelGrid id="grid" columns="3"  cellpadding="5">
                             <h:outputLabel for="nombre" value="Nombre(*):" style="font-weight:bold"/>                    
-                            <p:inputText id="nombre" value="#{validationView.text}" required="true" requiredMessage="El nombre es requerido." label="Nombre"/>
+                            <p:inputText id="nombre" value="#{ingresoTrabajadorBean.nombreTrabajador}" required="true" requiredMessage="El nombre es requerido." label="Nombre"/>
                             <p:message for="nombre" />
-                            <!--<h:outputText value="#{validationView.text}" /> -->
-                            
-                            <h:outputLabel for="apellido" value="Apellido(*):" style="font-weight:bold"/>                    
-                            <p:inputText id="apellido" value="#{validationView.text}" required="true" requiredMessage="El apellido es requerido." label="Apellido" />
+
+                            <h:outputLabel for="apellido" value="Apellido Paterno(*):" style="font-weight:bold"/>                    
+                            <p:inputText id="apellido" value="#{ingresoTrabajadorBean.apellidoPTrabajador}" required="true" requiredMessage="El apellido es requerido." label="Apellido" />
                             <p:message for="apellido" />
-                            <!--<h:outputText value="#{validationView.text}" /> -->
-                            
-                            <h:outputLabel for="apellidom" value="Segundo apellido(*):" style="font-weight:bold"/>                    
-                            <p:inputText id="apellidom" value="#{validationView.text}" required="true" requiredMessage="El apellido es requerido." label="Apellidom" />
-                            <p:message for="apellidom" />
-                            <!--<h:outputText value="#{validationView.text}" /> -->
-                            
-               
-                            
+
+                            <h:outputLabel for="apellidom" value="Apellido Materno(*):" style="font-weight:bold"/>                    
+                            <p:inputText id="apellidom" value="#{ingresoTrabajadorBean.apellidoMTrabajador}" required="true" requiredMessage="El apellido es requerido." label="Apellidom" />
+                            <p:message for="apellidom" />                          
+
                             <h:outputLabel for="rut" value="Rut(*):" style="font-weight:bold"/>                    
-                            <p:inputText id="rut" value="#{validationView.integer}" required="true"  requiredMessage="El rut es requerido." validatorMessage="ingrese rut correcto." label="rut">
-                                <f:validateDoubleRange minimum="8" maximum="8" />
+                            <p:inputText id="rut" value="#{ingresoTrabajadorBean.rutTrabajador}" required="true"  requiredMessage="El rut es requerido." label="rut">
                             </p:inputText>
                             <p:message for="rut" />
-                            <h:outputText value="#{validationView.integer}" />
-                            
-                             <h:outputLabel for="telefono" value="Telefono(*):" style="font-weight:bold"/>                    
-                            <p:inputText id="telefono" value="#{validationView.text}" required="true" requiredMessage="El Telefono es requerido." label="Telefono" />
+
+                            <h:outputLabel for="telefono" value="Telefono(*):" style="font-weight:bold"/>                    
+                            <p:inputText id="telefono" value="#{ingresoTrabajadorBean.telefonoTrabajador}" required="true" requiredMessage="El Telefono es requerido." label="Telefono" />
                             <p:message for="telefono" />
-                            
-                            <!--<h:outputText value="#{validationView.text}" /> -->
-                            
-                            
-                            
-  
-                           </h:panelGrid>
-                        
-                           <h:panelGrid id="grid2" columns="4"  cellpadding="5">
-                               
-                           
-                            
+
                             <h:outputLabel for="direccion" value="Direccion:" style="font-weight:bold"/>                    
-                            <p:inputText id="direccion" value="#{validationView.text}" required="true" requiredMessage="El Telefono es requerido." label="Direccion" />
+                            <p:inputText id="direccion" value="#{ingresoTrabajadorBean.direccionTrabajador}" label="Direccion" />
                             <p:message for="direccion" />
-                            <!--<h:outputText value="#{validationView.text}" /> -->
-                            
-                            
-                            <h:outputLabel for="date" value="Date" style="font-weight:bold"/>                 
-                            <p:inputText id="date" value="#{validationView.date}" label="Date">
+
+                            <h:outputLabel for="date" value="Fecha de Nacimiento" style="font-weight:bold"/>                 
+                            <p:inputText id="date" value="#{ingresoTrabajadorBean.fechaNacimientoTrabajador}" label="Date">
                                 <f:convertDateTime pattern="dd-MM-yyyy" />
                             </p:inputText>
                             <p:message for="date" />
-                            <h:outputText value="#{validationView.date}">
-                                <f:convertDateTime pattern="dd-MM-yyyy" />
-                            </h:outputText>
-
-                            <h:outputLabel for="desc" value="Description" style="font-weight:bold"/>
-                            <p:inputTextarea id="desc" value="#{validationView.description}" required="true" label="Description">
-                                <f:validateLength minimum="3" maximum="10" /> 
-                            </p:inputTextarea>
-                            <p:message for="desc" />
-                            <h:outputText value="#{validationView.description}" />
-                            
+                        </h:panelGrid>
+                        <h:panelGrid id="grid2" columns="4"  cellpadding="5">
                             <h:outputLabel for="afp" value="AFP(*):" style="font-weight:bold"/>
-                            <p:selectOneMenu id="console" value="#{selectOneMenuView.console}" style="font-weight:bold">
+                            <p:selectOneMenu id="afp" value="#{ingresoTrabajadorBean.afpTrabajador}" style="font-weight:bold">
                                 <f:selectItem itemLabel="Elija una" itemValue="" />
                                 <f:selectItem itemLabel="Bansander" itemValue="Bansander" />
                                 <f:selectItem itemLabel="Cuprum" itemValue="Cuprum" />
@@ -85,25 +55,14 @@
                                 <f:selectItem itemLabel="Provida" itemValue="Provida" />
                                 <f:selectItem itemLabel="Santa Maria" itemValue="Santa Maria" />
                             </p:selectOneMenu>
-                            
-                            <h:outputLabel for="estado civil" value="Estado civil:" style="font-weight:bold"/>
-                            <p:selectOneMenu id="console2" value="#{selectOneMenuView.console}" style="font-weight:bold">
-                                <f:selectItem itemLabel="casado" itemValue="" />
-                                <f:selectItem itemLabel="soltero" itemValue="Xbox One" />
-                                
+
+                            <h:outputLabel for="estadoCiv" value="Estado civil:" style="font-weight:bold"/>
+                            <p:selectOneMenu id="estadoCiv" value="#{ingresoTrabajadorBean.estadoCivilTrabajador}" style="font-weight:bold">
+                                <f:selectItem itemLabel="casado" itemValue="casado" />
+                                <f:selectItem itemLabel="soltero" itemValue="soltero" />
                             </p:selectOneMenu>
-                            
-                            
-                            
-                            
-
-                        </h:panelGrid>
-                        
-                        
-                        <p:commandButton value="Registrar" update="grid,grid2" icon="ui-icon-check" validateClient="true" style="margin-right:10px"/>
-
-                        
-                        
+                       </h:panelGrid>
+                        <p:commandButton value="Registrar" update="messages,nombre,apellido,apellidom,rut,telefono,direccion,date,afp,estadoCiv" icon="ui-icon-check" validateClient="true" style="margin-right:10px" actionListener="#{ingresoTrabajadorBean.agregarTrabajador}"/>
                     </p:panel>
                 </h:form>
             </ui:define>

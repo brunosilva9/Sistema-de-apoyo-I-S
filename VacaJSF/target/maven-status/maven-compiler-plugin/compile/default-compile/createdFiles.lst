@@ -5,6 +5,7 @@ cl\revengers\sb\ResumenTrabajoFacade.class
 cl\revengers\entities\Trabajador.class
 cl\revengers\entities\Adelanto.class
 cl\revengers\sb\AbstractFacade.class
+cl\revengers\backbeans\IngresoTrabajadorBean.class
 cl\revengers\entities\Login.class
 cl\revengers\entities\Trabajador_.class
 cl\revengers\entities\Producto_.class
