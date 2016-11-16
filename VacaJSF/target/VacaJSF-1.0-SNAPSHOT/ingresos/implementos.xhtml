@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>
+        <ui:composition template="/templates/commonTemplate.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <p:growl id="messages" showDetail="false" sticky="false" life="5000" />
+                    <p:panel header="Ingreso nuevo implemento" style="margin-bottom:20px;font-size: 11px!important;font-family: Verdana, Arial, Helvetica, sans-serif;">
+                        <h:panelGrid id="grid" columns="3"  cellpadding="5">
+                            <h:outputLabel for="nombre" value="Nombre(*):" style="font-weight:bold"/>                    
+                            <p:inputText id="nombre" value="#{ingresoImplementoBean.nombreImplemento}" required="true" requiredMessage="El nombre es requerido." label="Nombre"/>
+                            <p:message for="nombre" />
+
+                                                
+
+                            <h:outputLabel for="vida_Util" value="Vida util(en dias):" style="font-weight:bold"/>                    
+                            <p:inputText  id="vida_Util" value="#{ingresoImplementoBean.vidaUtil}" required="true"  requiredMessage="la vida util es requerida." label="Vida_Util">
+                            </p:inputText>
+                            <p:message for="vida_Util" />
+
+                            
+                         </h:panelGrid>
+                        <p:commandButton value="Registrar" update="messages,nombre,vida_Util" icon="ui-icon-check" validateClient="true" actionListener="#{ingresoImplementoBean.agregarImplemento}" style="margin-right:10px"/>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

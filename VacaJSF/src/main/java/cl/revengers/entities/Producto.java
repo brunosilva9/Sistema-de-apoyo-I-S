@@ -6,7 +6,6 @@
 package cl.revengers.entities;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,15 +14,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Esteban Perez
+ * @author cristopherandres
  */
 @Entity
 @Table(name = "producto")
@@ -32,7 +30,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Producto.findAll", query = "SELECT p FROM Producto p")
     , @NamedQuery(name = "Producto.findByIdProducto", query = "SELECT p FROM Producto p WHERE p.idProducto = :idProducto")
     , @NamedQuery(name = "Producto.findByNombre", query = "SELECT p FROM Producto p WHERE p.nombre = :nombre")
-    , @NamedQuery(name = "Producto.findByValor", query = "SELECT p FROM Producto p WHERE p.valor = :valor")})
+    , @NamedQuery(name = "Producto.findByValor", query = "SELECT p FROM Producto p WHERE p.valor = :valor")
+    , @NamedQuery(name = "Producto.findByPrecioP", query = "SELECT p FROM Producto p WHERE p.precioP = :precioP")})
 public class Producto implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,14 +45,21 @@ public class Producto implements Serializable {
     private String nombre;
     @Column(name = "valor")
     private Integer valor;
-    @OneToMany(mappedBy = "idProd")
-    private List<ResumenProductos> resumenProductosList;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "precio_p")
+    private int precioP;
 
     public Producto() {
     }
 
     public Producto(Integer idProducto) {
         this.idProducto = idProducto;
+    }
+
+    public Producto(Integer idProducto, int precioP) {
+        this.idProducto = idProducto;
+        this.precioP = precioP;
     }
 
     public Integer getIdProducto() {
@@ -80,13 +86,12 @@ public class Producto implements Serializable {
         this.valor = valor;
     }
 
-    @XmlTransient
-    public List<ResumenProductos> getResumenProductosList() {
-        return resumenProductosList;
+    public int getPrecioP() {
+        return precioP;
     }
 
-    public void setResumenProductosList(List<ResumenProductos> resumenProductosList) {
-        this.resumenProductosList = resumenProductosList;
+    public void setPrecioP(int precioP) {
+        this.precioP = precioP;
     }
 
     @Override

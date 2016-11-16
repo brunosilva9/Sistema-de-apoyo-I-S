@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>
+        <ui:composition template="/templates/commonTemplate.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <p:growl id="messages" showDetail="false" sticky="false" life="5000" />
+                    <p:panel header="Ingreso nuevo cliente" style="margin-bottom:20px;font-size: 11px!important;font-family: Verdana, Arial, Helvetica, sans-serif;">
+                        <h:panelGrid id="grid" columns="3"  cellpadding="5">
+                            
+                            <h:outputLabel for="nombre" value="Nombre(*):" style="font-weight:bold"/>                    
+                            <p:inputText id="nombre" value="#{ingresoClienteBean.nombreCliente}" required="true" requiredMessage="El nombre es requerido." label="Nombre"/>
+                            <p:message for="nombre" />
+
+                                                
+
+                            <h:outputLabel for="rut" value="Rut(*):" style="font-weight:bold"/>                    
+                            <p:inputText  id="rut" value="#{ingresoClienteBean.rut}" required="true"  requiredMessage="el rut es requerido." label="Rut">
+                            </p:inputText>
+                            <p:message for="rut" />
+
+                            
+                         </h:panelGrid>
+                        <p:commandButton value="Registrar" update="messages,nombre,rut" icon="ui-icon-check" validateClient="true" actionListener="#{ingresoClienteBean.agregarCliente}" style="margin-right:10px"/>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
