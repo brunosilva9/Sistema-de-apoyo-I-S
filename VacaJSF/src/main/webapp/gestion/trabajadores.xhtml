@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/templates/commonTemplate.xhtml">
+        <ui:define name="content">
+            <h:body>
+                <h:form id="formGrillaTrab">
+                    <p:growl id="mensajePantallaGrilla" showDetail="false" sticky="false" life="5000" /> 
+                    <p:panel header="Gestion de Trabajadores" style="margin-bottom:20px;font-size: 11px!important;font-family: Verdana, Arial, Helvetica, sans-serif;">
+                        <h:panelGrid id="grid" columns="1">
+                            <p:dataTable id="clientesGrid" var="trabajador" value="#{gestionTrabajadoresBean.listaTrabajadores}" editable="true" style="margin-bottom:20px" rowKey="#{trabajador.idTrabajador}" selectionMode="single" selection="#{gestionTrabajadoresBean.trabajadorSeleccionado}">
+                                <f:facet name="header">
+                                    Lista de Trabajadores
+                                </f:facet>
+                                <p:ajax event="rowEdit" listener="#{gestionTrabajadoresBean.onRowEdit}" update=":templateForm:formGrillaTrab:mensajePantallaGrilla"/>
+                                <p:column headerText="Id" width="3%">
+                                    <h:outputText value="#{trabajador.idTrabajador}"/>
+                                </p:column>
+                                <p:column headerText="Rut" filterBy="#{trabajador.rut}" filterMatchMode="exact">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{trabajador.rut}"/></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{trabajador.rut}" style="width:100%" label="Rut" required="true" requiredMessage="Error: Rut del Trabajador es obligatoria."/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column headerText="Nombre">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{trabajador.nombre}"/></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{trabajador.nombre}" style="width:100%" label="Nombre" required="true" requiredMessage="Error: Nombre del Trabajador es obligatoria."/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column headerText="Apellido Paterno">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{trabajador.apellidoP}"/></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{trabajador.apellidoP}" style="width:100%" label="Apellido Paterno" required="true" requiredMessage="Error: Apellido Paterno del Trabajador es obligatoria."/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column headerText="Apellido Materno">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{trabajador.apellidoM}"/></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{trabajador.apellidoM}" style="width:100%" label="Apellido Materno" required="true" requiredMessage="Error: Apellido Materno del Trabajador es obligatoria."/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column headerText="Fecha Nacimiento">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{trabajador.fechNac}"><f:convertDateTime pattern="dd-MM-yyyy"/></h:outputText></f:facet>
+                                        <f:facet name="input"><p:calendar id="txtFechNac" value="#{trabajador.fechNac}" pattern="dd-MM-yyyy" mask="true" required="true" requiredMessage="Error: La fecha de nacimiento del Trabajador es obligatoria." /></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column headerText="Prevision">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{trabajador.prevision}"></h:outputText></f:facet>
+                                        <f:facet name="input"><p:selectOneMenu id="selectPrevision" value="#{trabajador.prevision}" style="font-weight:bold;width: 85%">
+                                                <f:selectItem itemLabel="Bansander" itemValue="Bansander" />
+                                                <f:selectItem itemLabel="Cuprum" itemValue="Cuprum" />
+                                                <f:selectItem itemLabel="Habitat" itemValue="Habitat" />
+                                                <f:selectItem itemLabel="Plan vital" itemValue="Plan vital" />
+                                                <f:selectItem itemLabel="Provida" itemValue="Provida" />
+                                                <f:selectItem itemLabel="Santa Maria" itemValue="Santa Maria" />
+                                            </p:selectOneMenu></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column headerText="Estado Civil">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{trabajador.ECivil}"></h:outputText></f:facet>
+                                        <f:facet name="input"><p:selectOneMenu id="estadoCiv" value="#{trabajador.ECivil}" style="font-weight:bold;width: 85%">
+                                                <f:selectItem itemLabel="casado" itemValue="casado" />
+                                                <f:selectItem itemLabel="soltero" itemValue="soltero" />
+                                            </p:selectOneMenu></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column headerText="Telefono">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{trabajador.telefono}"></h:outputText></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{trabajador.telefono}" style="width:100%" label="Telefono" required="true" requiredMessage="Error: Telefono del Trabajador es obligatoria."/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column style="width:32px" headerText="Editar">
+                                    <p:rowEditor />
+                                </p:column>
+                            </p:dataTable>
+                        </h:panelGrid>
+                        <h:panelGrid>
+                            <p:commandButton value="Eliminar Trabajador" actionListener="#{gestionTrabajadoresBean.eliminarTrabajador}" update=":templateForm:formGrillaTrab:mensajePantallaGrilla, clientesGrid" style="margin-right: 20px" icon="ui-icon-close">
+                                <p:confirm header="Confirmación" message="¿Está seguro que desea eliminar este Trabajador?" icon="ui-icon-alert" />
+                            </p:commandButton>
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" style="margin-bottom:20px;font-size: 11px!important;font-family: Verdana, Arial, Helvetica, sans-serif;">
+                                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                        </h:panelGrid>
+                    </p:panel>
+                </h:form>
+            </h:body>
+        </ui:define>
+    </ui:composition>
+</html>

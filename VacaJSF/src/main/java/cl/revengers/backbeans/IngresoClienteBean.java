@@ -3,7 +3,6 @@ package cl.revengers.backbeans;
 import cl.revengers.entities.Cliente;
 import cl.revengers.sb.ClienteFacadeLocal;
 import java.io.Serializable;
-import java.util.Date;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;

@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/templates/commonTemplate.xhtml">
+        <ui:define name="content">
+            <h:body>
+                <h:form id="formGrillaClie">
+                    <p:growl id="mensajePantallaGrilla" showDetail="false" sticky="false" life="5000" /> 
+                    <p:panel header="Gestion de Clientes" style="margin-bottom:20px;font-size: 11px!important;font-family: Verdana, Arial, Helvetica, sans-serif;">
+                        <h:panelGrid id="grid" columns="1">
+                            <p:dataTable id="clientesGrid" var="cliente" value="#{gestionClientesBean.listaClientes}" editable="true" style="margin-bottom:20px" rowKey="#{cliente.idCliente}" selectionMode="single" selection="#{gestionClientesBean.clienteSeleccionado}">
+                                <f:facet name="header">
+                                    Lista de Clientes
+                                </f:facet>
+                                <p:ajax event="rowEdit" listener="#{gestionClientesBean.onRowEdit}" update=":templateForm:formGrillaClie:mensajePantallaGrilla"/>
+                                <p:column headerText="Id" width="3%">
+                                    <h:outputText value="#{cliente.idCliente}"/>
+                                </p:column>
+                                <p:column headerText="Rut" filterBy="#{cliente.rutCliente}" filterMatchMode="exact">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{cliente.rutCliente}"/></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{cliente.rutCliente}" style="width:100%" label="Rut" required="true" requiredMessage="Error: Rut del Trabajador es obligatoria."/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column headerText="Nombre">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{cliente.nombre}"/></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{cliente.nombre}" style="width:100%" label="Nombre" required="true" requiredMessage="Error: Nombre del Trabajador es obligatoria."/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                
+                               
+                             
+                              
+                              
+                                
+                                <p:column style="width:32px" headerText="Editar">
+                                    <p:rowEditor />
+                                </p:column>
+                            </p:dataTable>
+                        </h:panelGrid>
+                        <h:panelGrid>
+                            <p:commandButton value="Eliminar Cliente" actionListener="#{gestionClientesBean.eliminarCliente}" update=":templateForm:formGrillaClie:mensajePantallaGrilla, clientesGrid" style="margin-right: 20px" icon="ui-icon-close">
+                                <p:confirm header="Confirmación" message="¿Está seguro que desea eliminar este Trabajador?" icon="ui-icon-alert" />
+                            </p:commandButton>
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" style="margin-bottom:20px;font-size: 11px!important;font-family: Verdana, Arial, Helvetica, sans-serif;">
+                                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                        </h:panelGrid>
+                    </p:panel>
+                </h:form>
+            </h:body>
+        </ui:define>
+    </ui:composition>
+</html>
