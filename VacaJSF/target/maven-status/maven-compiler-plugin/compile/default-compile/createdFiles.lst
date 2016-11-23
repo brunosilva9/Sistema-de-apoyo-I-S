@@ -12,6 +12,7 @@ cl\revengers\sb\TrabajadorFacade.class
 cl\revengers\backbeans\IngresoClienteBean.class
 cl\revengers\entities\ResumenTrabajo.class
 cl\revengers\sb\ImplementoFacadeLocal.class
+cl\revengers\backbeans\GestionProductosBean.class
 cl\revengers\backbeans\PagosBean.class
 cl\revengers\backbeans\LoginBean.class
 cl\revengers\entities\Adelanto_.class
