@@ -12,7 +12,7 @@
                     <p:growl id="mensajePantallaGrilla" showDetail="false" sticky="false" life="5000" /> 
                     <p:panel header="Gestion de Trabajadores" style="margin-bottom:20px;font-size: 11px!important;font-family: Verdana, Arial, Helvetica, sans-serif;">
                         <h:panelGrid id="grid" columns="1">
-                            <p:dataTable id="clientesGrid" var="trabajador" value="#{gestionTrabajadoresBean.listaTrabajadores}" editable="true" style="margin-bottom:20px" rowKey="#{trabajador.idTrabajador}" selectionMode="single" selection="#{gestionTrabajadoresBean.trabajadorSeleccionado}">
+                            <p:dataTable id="clientesGrid" var="trabajador" value="#{gestionTrabajadoresBean.listaTrabajadores}" paginator="true" editable="true" style="margin-bottom:20px" rowKey="#{trabajador.idTrabajador}" selectionMode="single" selection="#{gestionTrabajadoresBean.trabajadorSeleccionado}">
                                 <f:facet name="header">
                                     Lista de Trabajadores
                                 </f:facet>
@@ -20,7 +20,7 @@
                                 <p:column headerText="Id" width="3%">
                                     <h:outputText value="#{trabajador.idTrabajador}"/>
                                 </p:column>
-                                <p:column headerText="Rut" filterBy="#{trabajador.rut}" filterMatchMode="exact">
+                                <p:column headerText="Rut" filterBy="#{trabajador.rut}" filterMatchMode="contains">
                                     <p:cellEditor>
                                         <f:facet name="output"><h:outputText value="#{trabajador.rut}"/></f:facet>
                                         <f:facet name="input"><p:inputText value="#{trabajador.rut}" style="width:100%" label="Rut" required="true" requiredMessage="Error: Rut del Trabajador es obligatoria."/></f:facet>

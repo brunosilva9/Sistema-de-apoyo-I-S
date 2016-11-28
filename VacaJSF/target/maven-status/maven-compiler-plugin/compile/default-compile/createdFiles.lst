@@ -8,8 +8,11 @@ cl\revengers\entities\ResumenTrabajo_.class
 cl\revengers\sb\ClienteFacadeLocal.class
 cl\revengers\sb\ProductoFacadeLocal.class
 cl\revengers\sb\LoginFacadeLocal.class
+cl\revengers\sb\FaenaFacadeLocal.class
 cl\revengers\sb\TrabajadorFacade.class
+cl\revengers\sb\FaenaFacade.class
 cl\revengers\backbeans\IngresoClienteBean.class
+cl\revengers\backbeans\CrearFaenaBean.class
 cl\revengers\entities\ResumenTrabajo.class
 cl\revengers\sb\ImplementoFacadeLocal.class
 cl\revengers\backbeans\GestionProductosBean.class
