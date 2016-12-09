@@ -30,5 +30,5 @@ public interface FaenaFacadeLocal {
 
     int count();
     
-    public Faena getFaenaById(int idFaena);
+    
 }

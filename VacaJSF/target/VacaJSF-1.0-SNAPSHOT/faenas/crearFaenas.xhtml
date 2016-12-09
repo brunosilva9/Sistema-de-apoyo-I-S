@@ -14,28 +14,32 @@
                     <p:panel header="Ingreso nueva Faena" style="margin-bottom:20px;font-size: 11px!important;font-family: Verdana, Arial, Helvetica, sans-serif;">
                         <h:panelGrid id="grid" columns="3"  cellpadding="5">
                             <h:outputLabel for="descripcion" value="descripcion(*):" style="font-weight:bold"/>                    
-                            <p:inputText id="descripcion" value="#{crearFaenaBean.descFaena}" required="true" requiredMessage="La descripcion es requerida." label="Descripcion"/>
+                            <p:inputText id="descripcion" value="#{crearFaenaBean.descripcion}" required="true" requiredMessage="La descripcion es requerida." label="Descripcion"/>
                             <p:message for="descripcion" />
 
                             <h:outputLabel for="ubicacion" value="Ubicacion(*):" style="font-weight:bold"/>                    
                             <p:inputText id="ubicacion" value="#{crearFaenaBean.ubicacion}" required="true" requiredMessage="El apellido es requerido." label="Ubicacion" />
                             <p:message for="ubicacion" />
 
-                            <h:outputLabel for="estado" value="Estado(*):" style="font-weight:bold"/>                    
-                            <p:inputText id="estado" value="#{crearFaenaBean.estado}" required="true" requiredMessage="El apellido es requerido." label="Estado" />
-                            <p:message for="estado" />                          
+                                                    
 
                             <h:outputLabel for="fechaIni" value="Fecha de Inicio" style="font-weight:bold"/>                 
-                            <p:inputText id="fechaIni" value="#{crearFaenaBean.fechaInicio}" label="FechaIni">
-                                <f:convertDateTime pattern="dd-MM-yyyy" />
-                            </p:inputText>
+                            <p:calendar  id="fechaIni" value="#{crearFaenaBean.fechaInicio}" pattern="dd-MM-yyyy" mask="true" required="true" requiredMessage="Error: La fecha de inicio  es obligatoria." />
                             <p:message for="fechaIni" />
                             
                             <h:outputLabel for="fechaTer" value="Fecha de Termino" style="font-weight:bold"/> 
-                            <p:inputText id="fechaTer" value="#{crearFaenaBean.fechaTermino}" label="FechaTer">
-                                <f:convertDateTime pattern="dd-MM-yyyy" />
-                            </p:inputText>
+                            
+                                
+                                <p:calendar  id="fechaTer" value="#{crearFaenaBean.fechaTermino}" pattern="dd-MM-yyyy" mask="true"  />
+                            
+                            
                             <p:message for="fechaTer" />
+                            
+                            <h:outputLabel for="estado" value="Estado:" style="font-weight:bold"/>
+                           <p:selectOneMenu id="estado" value="#{crearFaenaBean.estado}" style="font-weight:bold">
+                                <f:selectItem itemLabel="Activa" itemValue="activa" />
+                                <f:selectItem itemLabel="Terminada" itemValue="Terminada" />
+                            </p:selectOneMenu>
                         </h:panelGrid>
                         <h:panelGrid id="grid2" columns="4"  cellpadding="5">
                             

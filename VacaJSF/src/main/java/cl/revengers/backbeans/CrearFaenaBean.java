@@ -49,28 +49,21 @@ public class CrearFaenaBean implements Serializable {
         Faena trab = null;
         try {
 
-            trab = trabajadorFacade.getFaenaById(this.getIdF());
-
-            if (trab == null) {
                 trab = new Faena();
                 trab.setIdFaena(0);
                 trab.setIdCliente(this.getIdCliente());
                 trab.setUbicacion(this.getUbicacion().trim());
                 trab.setEstado(this.getEstado().trim());
-                trab.setDescripcion(this.getDescFaena().trim());
+                trab.setDescripcion(this.getDescripcion().trim());
                 
                 trab.setFechIni(this.getFechaInicio());
                 trab.setFechTer(this.getFechaTermino());
-                
+             
                 trabajadorFacade.create(trab);
                 this.limpiarValores();
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "faena creada exitosamente.", "faena creada exitosamente.");
                 FacesContext.getCurrentInstance().addMessage(null, message);
-            } else {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error, faena ya existe en base de datos.", "Error, faena ya existe en base de datos.");
-                FacesContext.getCurrentInstance().addMessage(null, message);
-            }
-
+           
         } catch (Exception e) {
             logger.error("Error grave creando faena.", e);
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error grave creando faena.", "Error grave creando faena.");
@@ -80,7 +73,7 @@ public class CrearFaenaBean implements Serializable {
 
     public void limpiarValores() {
         try {
-            this.setDescFaenar("");
+            this.setDescripcion("");
             this.setUbicacion("");
             this.setEstado("");
             this.setIdCliente(null);
@@ -95,13 +88,15 @@ public class CrearFaenaBean implements Serializable {
         }
     }
 
-    public String getDescFaena() {
+    public String getDescripcion() {
         return descripcion;
     }
 
-    public void setDescFaenar(String descripcion) {
+    public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
+
 
     public String getUbicacion() {
         return ubicacion;

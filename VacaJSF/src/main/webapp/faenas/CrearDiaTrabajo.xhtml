@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>
+        <ui:composition template="/templates/commonTemplate.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <p:growl id="messages" showDetail="false" sticky="false" life="5000" />
+                    <p:panel header="Ingreso nueva Faena" style="margin-bottom:20px;font-size: 11px!important;font-family: Verdana, Arial, Helvetica, sans-serif;">
+                        <h:panelGrid id="grid" columns="3"  cellpadding="5">
+                            <h:outputLabel for="descripcion" value="Costo de Supervision(*):" style="font-weight:bold"/>                    
+                            <p:inputText id="descripcion" value="#{crearDiaTrabajoBean.costoSuper}" required="true" requiredMessage="La descripcion es requerida." label="Descripcion"/>
+                            <p:message for="descripcion" />
+
+                            <h:outputLabel for="ubicacion" value="Costo Transporte(*):" style="font-weight:bold"/>                    
+                            <p:inputText id="ubicacion" value="#{crearDiaTrabajoBean.costoTran}" required="true" requiredMessage="El apellido es requerido." label="Ubicacion" />
+                            <p:message for="ubicacion" />
+
+                                                    
+
+                            <h:outputLabel for="fechaIni" value="Fecha de Inicio" style="font-weight:bold"/>                 
+                            <p:calendar  id="fechaIni" value="#{crearDiaTrabajoBean.fecha}" pattern="dd-MM-yyyy" mask="true" required="true" requiredMessage="Error: La fecha del dia es obligatoria." />
+                            <p:message for="fechaIni" />
+                            
+                            
+                            
+                           
+                        </h:panelGrid>
+                        <h:panelGrid id="grid2" columns="4"  cellpadding="5">
+                            
+                            
+                        
+                            <p:dataTable id="clientesGrid" var="faena" value="#{gestionFaenasBean.listaFaenas}"  style="margin-bottom:20px" rowKey="#{faena.idFaena}" selectionMode="single" selection="#{crearDiaTrabajoBean.idFaena}">
+                                <f:facet name="header">
+                                    Lista de Clientes
+                                </f:facet>
+                                
+                                <p:column headerText="Id" width="3%">
+                                    <h:outputText value="#{faena.idFaena}"/>
+                                </p:column>
+                                <p:column headerText="Descripcion" filterBy="#{faena.descripcion}" filterMatchMode="contains">
+                                    <h:outputText value="#{faena.descripcion}"/>
+                                </p:column>
+                                <p:column headerText="Ubicaion" filterBy="#{faena.ubicacion}" filterMatchMode="contains">
+                                    <h:outputText value="#{faena.ubicacion}"/>
+                                </p:column>
+                                <p:column headerText="Estado" filterBy="#{faena.estado}" filterMatchMode="contains">
+                                    <h:outputText value="#{faena.estado}"/>
+                                </p:column>
+                                <p:column headerText="Fecha inicio de faena" filterBy="#{faena.fechIni}" filterMatchMode="contains">
+                                    <h:outputText value="#{faena.fechIni}">
+                                    <f:convertDateTime pattern="dd-MM-yyyy" />
+                                    </h:outputText>
+
+                                    
+                                </p:column>
+                                
+                                
+                               
+                             
+                              
+                              
+                                
+                                
+                            </p:dataTable>
+                            
+                        
+                           
+                            
+                       </h:panelGrid>
+                        <p:commandButton value="Registrar" update="messages,descripcion,ubicacion,fechaIni,clientesGrid" icon="ui-icon-check" validateClient="true" actionListener="#{crearDiaTrabajoBean.crearDiaTrabajo}" style="margin-right:10px"/>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

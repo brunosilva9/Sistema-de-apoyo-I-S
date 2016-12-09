@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/templates/commonTemplate.xhtml">
+        <ui:define name="content">
+            <h:body>
+                <h:form id="formGrillaTrab">
+                    <p:growl id="mensajePantallaGrilla" showDetail="false" sticky="false" life="5000" /> 
+                    <p:panel header="Gestion de Faenas" style="margin-bottom:20px;font-size: 11px!important;font-family: Verdana, Arial, Helvetica, sans-serif;">
+                        <h:panelGrid id="grid" columns="1">
+                            <p:dataTable id="clientesGrid" var="faena" value="#{gestionFaenasBean.listaFaenas}" paginator="true" editable="true" style="margin-bottom:20px" rowKey="#{faena.idFaena}"  sortBy="#{faena.fechIni}" selectionMode="single" selection="#{gestionFaenasBean.faenaSeleccionada}" >
+                                <f:facet name="header">
+                                    Lista de Faenas
+                                </f:facet>
+                                <p:ajax event="rowEdit" listener="#{gestionFaenasBean.onRowEdit}" update=":templateForm:formGrillaTrab:mensajePantallaGrilla"/>
+                                <p:column headerText="Id" width="3%">
+                                    <h:outputText value="#{faena.idFaena}"/>
+                                </p:column>
+                                 <p:column headerText="Estado" filterBy="#{faena.estado}" filterMatchMode="contains">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{faena.estado}"></h:outputText></f:facet>
+                                        <f:facet name="input"><p:selectOneMenu id="estado" value="#{faena.estado}" style="font-weight:bold;width: 85%">
+                                                <f:selectItem itemLabel="Activa" itemValue="Activa" />
+                                                <f:selectItem itemLabel="Terminada" itemValue="Terminada" />
+                                            </p:selectOneMenu></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column headerText="Ubicacion">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{faena.ubicacion}"/></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{faena.ubicacion}" style="width:100%" label="Nombre" required="true" requiredMessage="Error: Nombre de la faena es obligatoria."/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                
+                                 <p:column headerText="Descripcion">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{faena.descripcion}"/></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{faena.descripcion}" style="width:100%" label="Nombre" required="true" requiredMessage="Error: Nombre de la faena es obligatoria."/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column headerText="Fecha inicio" filterBy="#{faena.fechIni}" filterMatchMode="contains">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{faena.fechIni}"><f:convertDateTime pattern="dd-MM-yyyy"/></h:outputText></f:facet>
+                                        <f:facet name="input"><p:calendar id="txtFechNac" value="#{faena.fechIni}" pattern="dd-MM-yyyy" mask="true" required="true" requiredMessage="Error: La fecha de inicio es obligatoria." /></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column headerText="Fecha Termino" filterBy="#{faena.fechTer}" filterMatchMode="contains">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{faena.fechTer}"><f:convertDateTime pattern="dd-MM-yyyy"/></h:outputText></f:facet>
+                                        <f:facet name="input"><p:calendar id="txtFechNac2" value="#{faena.fechTer}" pattern="dd-MM-yyyy" mask="true" required="true" requiredMessage="Error: La fecha de inicio es obligatoria." /></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                
+                              
+                                
+                                <!--<p:column headerText="Cliente"> 
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{faena.idCliente}"></h:outputText></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{faena.idCliente}" style="width:100%" label="Telefono" required="true" requiredMessage="Error: Telefono del Trabajador es obligatoria."/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>-->
+                                <p:column style="width:32px" headerText="Editar">
+                                    <p:rowEditor />
+                                </p:column>
+                            </p:dataTable>
+                        </h:panelGrid>
+                        <h:panelGrid columns="2">
+                            
+                            <p:commandButton value="Eliminar Faena" actionListener="#{gestionFaenasBean.eliminarFaena}" update=":templateForm:formGrillaTrab:mensajePantallaGrilla,clientesGrid" style="margin-right: 20px" icon="ui-icon-close">
+                                <p:confirm header="Confirmación" message="¿Está seguro que desea eliminar esta faena?" icon="ui-icon-alert" />
+                            </p:commandButton>
+                            
+                            <p:commandButton value="Terminar Faena" actionListener="#{gestionFaenasBean.actualizarFaena}" update=":templateForm:formGrillaTrab:mensajePantallaGrilla,clientesGrid" style="margin-right: 20px" icon="fa fa-money">
+                                <p:confirm header="Confirmación" message="¿Está seguro que desea actualizar faena terminada?" icon="ui-icon-alert" />
+                            </p:commandButton>
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" style="margin-bottom:20px;font-size: 11px!important;font-family: Verdana, Arial, Helvetica, sans-serif;">
+                                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                        </h:panelGrid>
+                    </p:panel>
+                </h:form>
+            </h:body>
+        </ui:define>
+    </ui:composition>
+</html>
+

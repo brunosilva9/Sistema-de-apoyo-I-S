@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/templates/commonTemplate.xhtml">
+        <ui:define name="content">
+            <h:body>
+                <h:form id="formGrillaTrab">
+                    <p:growl id="mensajePantallaGrilla" showDetail="false" sticky="false" life="5000" /> 
+                    <p:panel header="Gestion de Faenas" style="margin-bottom:20px;font-size: 11px!important;font-family: Verdana, Arial, Helvetica, sans-serif;">
+                        <h:panelGrid id="grid" columns="1">
+                            <p:dataTable id="clientesGrid" var="diaTrabajo" value="#{gestionDiaBean.listaDias}" paginator="true" editable="true" style="margin-bottom:20px" rowKey="#{diaTrabajo.idDia}"  sortBy="#{diaTrabajo.fechaD}" selectionMode="single" selection="#{gestionDiaBean.diaSeleccionado}" >
+                                <f:facet name="header">
+                                    Lista de Dias de faena
+                                </f:facet>
+                                <p:ajax event="rowEdit" listener="#{gestionDiaBean.onRowEdit}" update=":templateForm:formGrillaTrab:mensajePantallaGrilla"/>
+                                <p:column headerText="Id" width="3%">
+                                    <h:outputText value="#{diaTrabajo.idDia}"/>
+                                </p:column>
+                                
+                                <p:column headerText="Costo Transporte">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{diaTrabajo.costoTransporte}"/></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{diaTrabajo.costoTransporte}" style="width:100%" label="Nombre" required="true" requiredMessage="Error: Nombre de la faena es obligatoria."/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                
+                                <p:column headerText="Costo Supervision">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{diaTrabajo.costoSupervision}"/></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{diaTrabajo.costoSupervision}" style="width:100%" label="Nombre" required="true" requiredMessage="Error: Nombre de la faena es obligatoria."/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                
+                                
+                                <p:column headerText="Fecha" filterBy="#{diaTrabajo.fechaD}" filterMatchMode="contains">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{diaTrabajo.fechaD}"><f:convertDateTime pattern="dd-MM-yyyy"/></h:outputText></f:facet>
+                                        <f:facet name="input"><p:calendar id="txtFechNac" value="#{diaTrabajo.fechaD}" pattern="dd-MM-yyyy" mask="true" required="true" requiredMessage="Error: La fecha de inicio es obligatoria." /></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                
+                                
+                              
+                                
+                                <!--<p:column headerText="Cliente"> 
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{faena.idCliente}"></h:outputText></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{faena.idCliente}" style="width:100%" label="Telefono" required="true" requiredMessage="Error: Telefono del Trabajador es obligatoria."/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>-->
+                                <p:column style="width:32px" headerText="Editar">
+                                    <p:rowEditor />
+                                </p:column>
+                            </p:dataTable>
+                        </h:panelGrid>
+                        <h:panelGrid columns="2">
+                            
+                            <p:commandButton value="Eliminar Faena" actionListener="#{gestionDiaBean.eliminarDia}" update=":templateForm:formGrillaTrab:mensajePantallaGrilla,clientesGrid" style="margin-right: 20px" icon="ui-icon-close">
+                                <p:confirm header="Confirmación" message="¿Está seguro que desea eliminar esta faena?" icon="ui-icon-alert" />
+                            </p:commandButton>
+                            
+                            
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" style="margin-bottom:20px;font-size: 11px!important;font-family: Verdana, Arial, Helvetica, sans-serif;">
+                                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                        </h:panelGrid>
+                    </p:panel>
+                </h:form>
+            </h:body>
+        </ui:define>
+    </ui:composition>
+</html>
+

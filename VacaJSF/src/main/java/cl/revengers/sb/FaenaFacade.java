@@ -34,21 +34,8 @@ public class FaenaFacade extends AbstractFacade<Faena> implements FaenaFacadeLoc
         super(Faena.class);
     }
 
-    @Override
-    public Faena getFaenaById(int idFaena) {
-        Query query = null;
-        try{
-            query = em.createQuery("SELECT t FROM Faena t WHERE t.idFaena = :idFaena", Faena.class);
-            query.setParameter("idFaena", idFaena);
-            Faena trab = (Faena) query.getSingleResult();
-            return trab;
-        }catch(NoResultException e){
-            return null;
-        }catch(Exception e){
-            logger.error("Error grave obteniendo faena para id: " + idFaena, e);
-            throw new RuntimeException(e);
-        }
-    }
+    
+  
     
     
     

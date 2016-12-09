@@ -18,10 +18,7 @@ import javax.faces.view.ViewScoped;
 import org.apache.log4j.Logger;
 import org.primefaces.event.RowEditEvent;
 
-/**
- *
- * @author Esteban Perez INNOVA-TI
- */
+
 @Named(value = "gestionTrabajadoresBean")
 @ViewScoped
 public class GestionTrabajadoresBean implements Serializable {
