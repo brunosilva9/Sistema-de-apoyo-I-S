@@ -16,7 +16,7 @@
                            
                             <p:dataTable id="clientesGrid3" var="cliente" value="#{registrarTrabajoBean.listaProductos}"  style="margin-bottom:20px" rowKey="#{cliente.idProducto}"  rows="10" paginator="true" selectionMode="single" selection="#{registrarTrabajoBean.idProducto}">
                                 <f:facet name="header">
-                                    Lista de Clientes
+                                    Lista de Productos
                                 </f:facet>
                                 
                                 <p:column headerText="Id" width="3%">
@@ -41,7 +41,7 @@
 
                                 <p:dataTable id="clientesGrid" var="cliente2" value="#{registrarTrabajoBean.listaDias}"  rows="10" paginator="true" style="margin-bottom:20px" rowKey="#{cliente2.idDia}" selectionMode="single" selection="#{registrarTrabajoBean.idDia}">
                                 <f:facet name="header">
-                                    Lista de Productos
+                                    Lista de Dias
                                 </f:facet>
                                 
                                 <p:column headerText="Id" width="3%">

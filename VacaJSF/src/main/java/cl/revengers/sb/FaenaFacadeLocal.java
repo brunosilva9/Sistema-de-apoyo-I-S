@@ -6,6 +6,8 @@
 package cl.revengers.sb;
 
 import cl.revengers.entities.Faena;
+import cl.revengers.entities.ResumenTrabajo;
+import cl.revengers.entities.Trabajador;
 import java.util.List;
 import javax.ejb.Local;
 

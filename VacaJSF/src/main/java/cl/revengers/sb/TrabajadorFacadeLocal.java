@@ -31,4 +31,5 @@ public interface TrabajadorFacadeLocal {
     int count();
     
     public Trabajador getTrabajadorByRut(int rutTrabajador);
+    public List<Trabajador> obtenerTrabajadorPorFaena(int idFaena);
 }

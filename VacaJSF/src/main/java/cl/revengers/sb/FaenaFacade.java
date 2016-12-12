@@ -6,6 +6,7 @@
 package cl.revengers.sb;
 
 import cl.revengers.entities.Faena;
+import cl.revengers.entities.Trabajador;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -33,6 +34,8 @@ public class FaenaFacade extends AbstractFacade<Faena> implements FaenaFacadeLoc
     public FaenaFacade() {
         super(Faena.class);
     }
+     
+    
 
     
   

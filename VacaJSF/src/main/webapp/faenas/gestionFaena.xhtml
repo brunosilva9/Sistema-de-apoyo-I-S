@@ -82,6 +82,29 @@
                                 <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                             </p:confirmDialog>
                         </h:panelGrid>
+                        <h:panelGrid columns="1" cellpadding="10">
+                            <p:dataTable id="tabTrabajos" var="trab" value="#{pagosBean.listaResumenes}" rowKey="#{trab.idResumenTrabajo}"
+                                         selection="#{pagosBean.resumenesSeleccionados}" selectionMode="multiple" emptyMessage="No existen trabajadores para listar" paginator="true" >
+                                <f:facet name="header">
+                                    Lista Trabajadores
+                                </f:facet>
+                                <p:column headerText="ID Trabajador">
+                                    <h:outputText value="#{trab.idTrabajador}" />
+                                </p:column>
+                                <p:column headerText="Nombre Trabajador">
+                                    <h:outputText value="#{trab.nombreTrabajador} #{trab.apellidoP} #{trab.apellidoM}" />
+                                </p:column>
+                                <p:column headerText="Rut">
+                                    <h:outputText value="#{trab.rut}" />
+                                </p:column>
+                                <p:column headerText="Fecha Trabajo">
+                                    <h:outputText value="#{trab.fechaFormateadaTrabajo}" />
+                                </p:column>
+                                <p:column headerText="Total a Pagar">
+                                    <h:outputText value="#{trab.totalPagar}" />
+                                </p:column>
+                            </p:dataTable> 
+                        </h:panelGrid>
                     </p:panel>
                 </h:form>
             </h:body>

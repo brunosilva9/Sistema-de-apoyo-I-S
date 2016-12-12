@@ -6,6 +6,7 @@
 package cl.revengers.sb;
 
 import cl.revengers.entities.Trabajador;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -49,6 +50,26 @@ public class TrabajadorFacade extends AbstractFacade<Trabajador> implements Trab
             throw new RuntimeException(e);
         }
     }
+        
+        
+    @Override
+        public List<Trabajador> obtenerTrabajadorPorFaena(int idFaena) {
+        Query query = null;
+        try {
+            query = em.createQuery("SELECT r FROM Trabajador r JOIN ResumenTrabajo t JOIN DiaTrabajo d JOIN Faena f WHERE f.idFaena = :idFaena", Trabajador.class);
+            
+            query.setParameter("idFaena", idFaena);
+            List<Trabajador> lista = (List<Trabajador>) query.getResultList();
+           
+            return lista;
+        } catch (Exception e) {
+            logger.error("Error grave obteniendo resumenes por trabajador.");
+            throw new RuntimeException(e);
+        } finally {
+            query = null;
+        }
+    }
+    
     
     
     
