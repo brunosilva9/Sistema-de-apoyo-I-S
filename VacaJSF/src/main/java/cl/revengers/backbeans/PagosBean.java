@@ -45,6 +45,7 @@ public class PagosBean implements Serializable {
     private String dvBusqueda;
     private List<ResumenTrabajoVO> listaResumenes;
     private List<ResumenTrabajoVO> resumenesSeleccionados;
+    private String [] rutS;
 
     @ManagedProperty(value = "#{loginBean}")
     private LoginBean loginBean;
@@ -55,6 +56,16 @@ public class PagosBean implements Serializable {
 
     public void setRutBusqueda(String rutBusqueda) {
         this.rutBusqueda = rutBusqueda;
+    }
+    
+    public void setRutBusqueda2(String rutBusqueda) {
+        
+        this.rutBusqueda = rutBusqueda.replace(".","");
+        rutS=this.rutBusqueda.split("-");
+        this.rutBusqueda=rutS[0];
+        this.rutBusqueda=this.rutBusqueda.substring(0,8);
+        
+        
     }
 
     public String getDvBusqueda() {
@@ -91,6 +102,7 @@ public class PagosBean implements Serializable {
 
     public void listarTrabajos() {
         try {
+            setRutBusqueda2(this.rutBusqueda);
             List<ResumenTrabajo> listaResumenesPorTrabajador = resumenTrabajoFacade.obtenerResumenesPorTrabajador(Integer.parseInt(this.getRutBusqueda()));
             List<ResumenTrabajoVO> listaResumenTrabajoVO = new ArrayList<>();
             ResumenTrabajoVO resTrabVO = null;

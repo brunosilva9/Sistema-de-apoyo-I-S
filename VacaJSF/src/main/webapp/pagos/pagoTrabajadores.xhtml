@@ -19,8 +19,8 @@ and open the template in the editor.
                     <p:panel id="panel1" header="Búsqueda de Trabajadores" style="margin-bottom:20px;font-size: 11px!important;font-family: Verdana, Arial, Helvetica, sans-serif;">
                         <h:panelGrid columns="4" cellpadding="10">
                             <h:outputText value="Rut Trabajador"/>
-                            <p:inputText id="txtRut" value="#{pagosBean.rutBusqueda}" maxlength="8" required="true" requiredMessage="El Rut es requerido."/> 
-                            <p:inputText id="txtDv" value="#{pagosBean.dvBusqueda}" style="width: 20px" maxlength="1" required="true" requiredMessage="El Dv del Rut es requerido."/>
+                            <p:inputText id="txtRut" value="#{pagosBean.rutBusqueda}" maxlength="12"  required="true" requiredMessage="El Rut es requerido."/> 
+                            <!--<p:inputText id="txtDv" value="#{pagosBean.dvBusqueda}" style="width: 20px" maxlength="1" required="true" requiredMessage="El Dv del Rut es requerido."/>-->
                             <p:commandButton value="Buscar" id="btnBuscar" actionListener="#{pagosBean.listarTrabajos}" update="tabTrabajos,messages"/>
                         </h:panelGrid>
                         <h:panelGrid columns="1" cellpadding="10">

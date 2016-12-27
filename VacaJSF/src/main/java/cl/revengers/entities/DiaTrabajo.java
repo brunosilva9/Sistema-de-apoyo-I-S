@@ -6,6 +6,7 @@
 package cl.revengers.entities;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -113,6 +114,11 @@ public class DiaTrabajo implements Serializable {
 
     public void setIdFaena(Faena idFaena) {
         this.idFaena = idFaena;
+    }
+    
+    public String getFechaFormateada(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return sdf.format(this.getFechaD());
     }
 
     @Override

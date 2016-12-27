@@ -6,6 +6,7 @@
 package cl.revengers.sb;
 
 import cl.revengers.entities.ResumenProductos;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -29,9 +30,28 @@ public class ResumenProdFacade extends AbstractFacade<ResumenProductos> implemen
     protected EntityManager getEntityManager() {
         return em;
     }
+    
 
     public ResumenProdFacade() {
         super(ResumenProductos.class);
+    }
+    
+       @Override
+        public List <ResumenProductos> obtenerResrPorDia(int idDia) {
+        Query query = null;
+        try {
+            query = em.createQuery("SELECT r FROM ResumenProductos r JOIN ResumenTrabajo t JOIN DiaTrabajo d WHERE d.idDia = :idDia AND d.idDia = t.idDia.idDia AND t.idResumen = r.idResumen.idResumen GROUP BY r.idResProd ", ResumenProductos.class);
+            
+            query.setParameter("idDia", idDia);
+            List<ResumenProductos> lista = (List<ResumenProductos>) query.getResultList();
+           
+            return lista;
+        } catch (Exception e) {
+            logger.error("Error grave obteniendo resumenes por trabajador.");
+            throw new RuntimeException(e);
+        } finally {
+            query = null;
+        }
     }
 
     

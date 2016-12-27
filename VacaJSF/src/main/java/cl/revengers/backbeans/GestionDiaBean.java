@@ -6,6 +6,8 @@
 package cl.revengers.backbeans;
 
 import cl.revengers.entities.DiaTrabajo;
+import cl.revengers.entities.ResumenProductos;
+import cl.revengers.sb.ResumenProdFacadeLocal;
 import cl.revengers.sb.DiaTrabajoFacadeLocal;
 import java.io.Serializable;
 import java.util.List;
@@ -25,10 +27,14 @@ public class GestionDiaBean implements Serializable {
 
     @EJB
     private DiaTrabajoFacadeLocal diaFacade;
+    @EJB
+    private ResumenProdFacadeLocal resFacade;
 
     private final static Logger logger = Logger.getLogger(GestionDiaBean.class);
 
     private List<DiaTrabajo> listaDias;
+    
+    private List<ResumenProductos> listaRes;
     private DiaTrabajo diaSeleccionado;
     private String rutBusqueda;
     private String dvBusqueda;
@@ -77,6 +83,18 @@ public class GestionDiaBean implements Serializable {
         }
     }
     
+      public void listarTrabajo() {
+        try {
+             listaRes = resFacade.obtenerResrPorDia(diaSeleccionado.getIdDia());
+            
+
+        } catch (Exception e) {
+            logger.error("Error grave listando resumen de trabajos", e);
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error grave listando resumen de trabajos.", "Error grave listando resumen de trabajos.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+    }
+    
     
  
 
@@ -111,6 +129,15 @@ public class GestionDiaBean implements Serializable {
     public void setDvBusqueda(String dvBusqueda) {
         this.dvBusqueda = dvBusqueda;
     }
+
+    public List<ResumenProductos> getListaRes() {
+        return listaRes;
+    }
+
+    public void setListaRes(List<ResumenProductos> listaRes) {
+        this.listaRes = listaRes;
+    }
+    
 
 
   

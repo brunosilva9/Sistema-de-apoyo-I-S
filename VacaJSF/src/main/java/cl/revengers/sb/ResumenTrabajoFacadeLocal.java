@@ -31,4 +31,5 @@ public interface ResumenTrabajoFacadeLocal {
     int count();
  
     public List<ResumenTrabajo> obtenerResumenesPorTrabajador(int rutTrabajador);
+    
 }

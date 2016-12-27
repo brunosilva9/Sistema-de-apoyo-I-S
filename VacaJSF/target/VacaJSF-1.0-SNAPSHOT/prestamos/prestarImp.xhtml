@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <h:body >
+        
+        <ui:composition template="/templates/commonTemplate.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <p:growl id="messages" showDetail="false" sticky="false" life="5000" />
+                    <p:panel header="Ingreso nueva Faena" style="  margin-bottom:20px;font-size: 11px!important;font-family: Verdana, Arial, Helvetica, sans-serif;">
+                        <h:panelGrid   id="grid1" columns="4"  cellpadding="5">
+                            
+                            <h:outputLabel for="imp" value="Lista Diass" style="font-weight:bold;"/> 
+                            <p:selectOneListbox id="imp" style="background-color: greenyellow" widgetVar="imp" value="#{prestamosImpBean.impSeleccionado}"  converter="implementoConverter" filter="true" filterMatchMode="contains">
+                                <f:selectItems value="#{prestamosImpBean.listaImp}" var="imple" itemLabel="#{imple.nombre} #{imple.vidaUtil} Dias" itemValue="#{imple}" />
+                            </p:selectOneListbox>
+                            
+                            <h:outputLabel for="date" value="Fecha de Prestamo" style="font-weight:bold"/>                 
+                                           
+                            <p:calendar  id="date" value="#{prestamosImpBean.fechaPrestamo}"  maxdate="today" pattern="dd-MM-yyyy" mask="true" required="true" requiredMessage="Error: La fecha de Prestamo  es obligatoria." />
+                            
+                            <p:message for="date" />
+
+                          
+                        </h:panelGrid>
+                        
+                        <h:panelGrid id="grid3" columns="3"  cellpadding="5">
+
+
+                            <p:dataTable id="clientesGrid2"   var="cliente"  value="#{prestamosImpBean.listaTrab}"  rows="10" paginator="true" style="margin-bottom:20px; background-color: greenyellow" rowKey="#{cliente.idTrabajador}"  selection="#{prestamosImpBean.listaTrabSeleccionados}">
+                                <f:facet name="header"  >
+                                    Lista de Trabajadores
+                                </f:facet >
+                                <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+                                <p:column headerText="Id" width="3%" style="background-color: greenyellow">
+                                    <h:outputText value="#{cliente.idTrabajador}"/>
+                                </p:column>
+
+                                <p:column headerText="Nombre" filterBy="#{cliente.nombre}" filterMatchMode="contains">
+                                    <h:outputText value="#{cliente.nombre}"/>
+                                </p:column>
+                                <p:column headerText="Rut"  filterBy="#{cliente.rut}" filterMatchMode="contains">
+                                    <h:outputText value="#{cliente.rut}"/>
+                                </p:column>
+
+                             
+
+                            </p:dataTable>
+
+                        </h:panelGrid>
+                        <p:commandButton value="Registrar" update="messages,clientesGrid2,imp" icon="ui-icon-check" validateClient="true" actionListener="#{prestamosImpBean.crearPrestamo}" style="margin-right:10px"/>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

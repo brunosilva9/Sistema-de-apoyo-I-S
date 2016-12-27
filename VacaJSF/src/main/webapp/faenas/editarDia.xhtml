@@ -43,6 +43,14 @@
                                     </p:cellEditor>
                                 </p:column>
                                 
+                                <p:column headerText="Faena" filterBy="#{diaTrabajo.idFaena.descripcion}" filterMatchMode="contains">
+                                   
+                                        <h:outputText value="#{diaTrabajo.idFaena.descripcion}"/>
+                                        
+                                   
+                                </p:column>
+                                
+                                
                                 
                               
                                 
@@ -57,18 +65,54 @@
                                 </p:column>
                             </p:dataTable>
                         </h:panelGrid>
-                        <h:panelGrid columns="2">
+                        <h:panelGrid columns="2" cellpadding="10">
                             
-                            <p:commandButton value="Eliminar Faena" actionListener="#{gestionDiaBean.eliminarDia}" update=":templateForm:formGrillaTrab:mensajePantallaGrilla,clientesGrid" style="margin-right: 20px" icon="ui-icon-close">
+                            <p:commandButton value="Eliminar Dia de trabajo" actionListener="#{gestionDiaBean.eliminarDia}" update=":templateForm:formGrillaTrab:mensajePantallaGrilla,clientesGrid" style="margin-right: 20px" icon="ui-icon-close">
                                 <p:confirm header="Confirmación" message="¿Está seguro que desea eliminar esta faena?" icon="ui-icon-alert" />
                             </p:commandButton>
-                            
+                            <p:commandButton value="Buscar Trabajos Realizados" id="btnBuscar" actionListener="#{gestionDiaBean.listarTrabajo}" update="resProd"/>
+
                             
                             <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" style="margin-bottom:20px;font-size: 11px!important;font-family: Verdana, Arial, Helvetica, sans-serif;">
                                 <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                                 <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                             </p:confirmDialog>
+                             
+                            
+                          
+                            
+                            
+                            
+                            
+                            
                         </h:panelGrid>
+                        
+                        
+                         <h:panelGrid columns="1" cellpadding="10">
+                             <p:dataTable id="resProd" var="resprod" value="#{gestionDiaBean.listaRes}" rowKey="#{resprod.idResProd}"
+                                         selection="#{pagosBean.resumenesSeleccionados}" selectionMode="multiple" emptyMessage="No existen trabajadores para listar" paginator="true" >
+                                <f:facet name="header">
+                                    Lista Trabajos en por dia
+                                </f:facet>
+                                <p:column headerText="Producto">
+                                    <h:outputText value="#{resprod.idProd.nombre}" />
+                                </p:column>
+                                 
+                                 <p:column headerText="Cantidad">
+                                     <h:outputText value="#{resprod.cantidad}" />
+                                </p:column>
+                                
+                                <p:column headerText="Realizado por">
+                                    <h:outputText value="#{resprod.idResumen.idTrabajador.nombre} #{resprod.idResumen.idTrabajador.apellidoP}  " />
+                                </p:column>
+                                
+                                
+                            </p:dataTable>
+                             
+                          
+                        </h:panelGrid>
+                        
+                       
                     </p:panel>
                 </h:form>
             </h:body>

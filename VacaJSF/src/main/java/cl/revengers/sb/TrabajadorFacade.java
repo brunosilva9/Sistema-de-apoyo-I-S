@@ -56,7 +56,7 @@ public class TrabajadorFacade extends AbstractFacade<Trabajador> implements Trab
         public List<Trabajador> obtenerTrabajadorPorFaena(int idFaena) {
         Query query = null;
         try {
-            query = em.createQuery("SELECT r FROM Trabajador r JOIN ResumenTrabajo t JOIN DiaTrabajo d JOIN Faena f WHERE f.idFaena = :idFaena", Trabajador.class);
+            query = em.createQuery("SELECT t FROM Trabajador t JOIN ResumenTrabajo r JOIN DiaTrabajo d JOIN Faena f  WHERE f.idFaena = :idFaena AND f.idFaena = d.idFaena.idFaena AND d.idDia = r.idDia.idDia AND t.idTrabajador = r.idTrabajador.idTrabajador GROUP BY t.idTrabajador", Trabajador.class);
             
             query.setParameter("idFaena", idFaena);
             List<Trabajador> lista = (List<Trabajador>) query.getResultList();

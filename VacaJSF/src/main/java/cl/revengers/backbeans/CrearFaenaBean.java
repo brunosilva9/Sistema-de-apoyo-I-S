@@ -144,7 +144,7 @@ public class CrearFaenaBean implements Serializable {
     
     
     public Date getFechaTermino() {
-        return fechaInicio;
+        return fechaTermino;
     }
 
     public void setFechaTermino(Date fechaTermino) {

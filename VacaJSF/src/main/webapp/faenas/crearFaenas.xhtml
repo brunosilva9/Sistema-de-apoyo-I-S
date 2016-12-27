@@ -11,7 +11,7 @@
             <ui:define name="content">
                 <h:form>
                     <p:growl id="messages" showDetail="false" sticky="false" life="5000" />
-                    <p:panel header="Ingreso nueva Faena" style="margin-bottom:20px;font-size: 11px!important;font-family: Verdana, Arial, Helvetica, sans-serif;">
+                    <p:panel  header="Ingreso nueva Faena" style="margin-bottom:20px;font-size: 11px!important;font-family: Verdana, Arial, Helvetica, sans-serif;">
                         <h:panelGrid id="grid" columns="3"  cellpadding="5">
                             <h:outputLabel for="descripcion" value="descripcion(*):" style="font-weight:bold"/>                    
                             <p:inputText id="descripcion" value="#{crearFaenaBean.descripcion}" required="true" requiredMessage="La descripcion es requerida." label="Descripcion"/>
@@ -24,7 +24,7 @@
                                                     
 
                             <h:outputLabel for="fechaIni" value="Fecha de Inicio" style="font-weight:bold"/>                 
-                            <p:calendar  id="fechaIni" value="#{crearFaenaBean.fechaInicio}" pattern="dd-MM-yyyy" mask="true" required="true" requiredMessage="Error: La fecha de inicio  es obligatoria." />
+                            <p:calendar  id="fechaIni" value="#{crearFaenaBean.fechaInicio}"  maxdate="today" pattern="dd-MM-yyyy" mask="true" required="true" requiredMessage="Error: La fecha de inicio  es obligatoria." />
                             <p:message for="fechaIni" />
                             
                             <h:outputLabel for="fechaTer" value="Fecha de Termino" style="font-weight:bold"/> 

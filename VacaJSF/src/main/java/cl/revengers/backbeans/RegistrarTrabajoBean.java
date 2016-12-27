@@ -17,6 +17,7 @@ import cl.revengers.sb.ResumenTrabajoFacadeLocal;
 import cl.revengers.sb.ResumenProdFacadeLocal;
 import cl.revengers.sb.TrabajadorFacadeLocal;
 import cl.revengers.sb.DiaTrabajoFacadeLocal;
+import cl.revengers.vo.DiaTrabajoVO;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -30,7 +31,6 @@ import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import org.apache.log4j.Logger;
 
-
 @Named(value = "registrarTrabajoBean")
 @ViewScoped
 public class RegistrarTrabajoBean implements Serializable {
@@ -39,12 +39,12 @@ public class RegistrarTrabajoBean implements Serializable {
     private ProductoFacadeLocal productoFacade;
     @EJB
     private DiaTrabajoFacadeLocal diaFacade;
-    
+
     @EJB
     private TrabajadorFacadeLocal trabajadorFacade;
     @EJB
     private ResumenTrabajoFacadeLocal resumenTrabajoFacade;
-    
+
     @EJB
     private ResumenProdFacadeLocal resumenProdFacade;
 
@@ -52,33 +52,23 @@ public class RegistrarTrabajoBean implements Serializable {
 
     private List<Producto> listaProductos;
     private Producto productoSeleccionado;
-    
-     private List<DiaTrabajo> listaDias;
-    private DiaTrabajo diaSeleccionado;
-    
+
     private List<Trabajador> listaTrabajadores;
+    private List<trabVO> ListaTrabSeleccionados;
     private Trabajador trabajadorSeleccionado;
     private List<trabVO> listaTrab;
-    
-    
-    
+
     private Trabajador idTrabajador;
     private trabVO idTrabVo;
-    private DiaTrabajo idDia;
     private String estado;
-    
- 
-   private ResumenTrabajo idRes;
-   private Producto idProducto;
-   private int cantidad;
-   
-   
-    
-    
-    
-    
-    
-    
+
+    private ResumenTrabajo idRes;
+    private Producto idProducto;
+    private int cantidad;
+
+    private List<DiaTrabajo> listaDiasTrabajo;
+    private DiaTrabajo diaTrabajoSeleccionado;
+
     /**
      * Creates a new instance of GestionClientesBean
      */
@@ -87,42 +77,39 @@ public class RegistrarTrabajoBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        this.listaProductos = productoFacade.findAll();
-        this.listaDias = diaFacade.findAll();
-        this.listaTrabajadores = trabajadorFacade.findAll();
-        
-        
-        
-        
-           try {
-            
+        try {
+            /*if(listaDiasOriginal != null && !listaDiasOriginal.isEmpty()){
+                this.listaDias = new ArrayList<>();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                for(DiaTrabajo dia : listaDiasOriginal){
+                    DiaTrabajoVO diaTrab = new DiaTrabajoVO();
+                    diaTrab.setCodigo(dia.getIdDia());
+                    diaTrab.setFecha(dia.getFechaD());
+                    diaTrab.setFechaFormat(sdf.format(dia.getFechaD()));
+                    listaDias.add(diaTrab);
+                }
+            }*/
+
+            this.listaProductos = productoFacade.findAll();
+            this.listaDiasTrabajo = diaFacade.findAll();
+            this.listaTrabajadores = trabajadorFacade.findAll();
+
             List<trabVO> listaTrabVO = new ArrayList<>();
             trabVO resTrabVO = null;
 
-            if (listaTrabajadores != null && !listaTrabajadores.isEmpty()) {
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-
-                for (Trabajador res : listaTrabajadores) {
-                    
-                    resTrabVO = new trabVO();
-                    resTrabVO.setIdTrabajador(res);
-                    
-                    resTrabVO.setNombreTrabajador(res.getNombre().trim());
-                    resTrabVO.setApellidoP(res.getApellidoP().trim());
-                    
-                    
-                    resTrabVO.setRut(res.getRut());
-                    resTrabVO.setCantidad(cantidad);
-                    listaTrabVO.add(resTrabVO);
-                }
-
-                this.setListaTrab(listaTrabVO);
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Trabajadores listados", "Trabajadores listados");
-                FacesContext.getCurrentInstance().addMessage(null, message);
-            } else {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "No se han encontrado registros para listar", "No se han encontrado registros para listar");
-                FacesContext.getCurrentInstance().addMessage(null, message);
+            for (Trabajador res : listaTrabajadores) {
+                resTrabVO = new trabVO();
+                resTrabVO.setIdTrabajador(res);
+                resTrabVO.setNombreTrabajador(res.getNombre().trim());
+                resTrabVO.setApellidoP(res.getApellidoP().trim());
+                resTrabVO.setRut(res.getRut());
+                resTrabVO.setCantidad(cantidad);
+                listaTrabVO.add(resTrabVO);
             }
+
+            this.setListaTrab(listaTrabVO);
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Trabajadores listados", "Trabajadores listados");
+            FacesContext.getCurrentInstance().addMessage(null, message);
 
         } catch (Exception e) {
             logger.error("Error grave listando resumen de trabajos", e);
@@ -130,53 +117,67 @@ public class RegistrarTrabajoBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
-    
+
     public void crearResumen() {
         ResumenTrabajo trab = null;
         ResumenProductos trab2 = null;
         try {
 
-                trab = new ResumenTrabajo();
-                trab.setIdResumen(0);
-                trab.setIdTrabajador(this.getIdTrabVo().getIdTrabajador());
-                trab.setEstado("no pagado");
-                
-                trab.setIdDia(this.getIdDia());
-                
-                
-             
-                resumenTrabajoFacade.create(trab);
-                
-                trab2= new ResumenProductos();
-                trab2.setCantidad(idTrabVo.getCantidad());
-                trab2.setIdProd(this.getIdProducto());
-                trab2.setIdResumen(trab);
-                resumenProdFacade.create(trab2);
-                this.limpiarValores();
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Resumen trabajo creado exitosamente.", "Resumen trabajo creada exitosamente.");
+            if (this.getProductoSeleccionado() == null) {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Debe seleccionar un producto.", "Error: Debe seleccionar un producto.");
                 FacesContext.getCurrentInstance().addMessage(null, message);
-           
+                return;
+            }
+
+            if (this.getDiaTrabajoSeleccionado() == null) {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Debe seleccionar un dia.", "Error: Debe seleccionar un dia.");
+                FacesContext.getCurrentInstance().addMessage(null, message);
+                return;
+            }
+
+            if (this.ListaTrabSeleccionados== null) {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Debe seleccionar un Trabajador.", "Error: Debe seleccionar un Trabajador.");
+                FacesContext.getCurrentInstance().addMessage(null, message);
+                return;
+            }
+            
+            for (trabVO trabajador : this.getListaTrabSeleccionados()) {
+            trab = new ResumenTrabajo();
+            trab.setIdResumen(0);
+            trab.setIdTrabajador(trabajador.getIdTrabajador());
+            trab.setEstado("no pagado");
+
+            //DiaTrabajo diaTrabSel = diaFacade.find((int) this.getDiaSeleccionado().getCodigo());
+            trab.setIdDia(this.getDiaTrabajoSeleccionado());
+
+            resumenTrabajoFacade.create(trab);
+
+            trab2 = new ResumenProductos();
+            trab2.setCantidad(trabajador.getCantidad());
+            trab2.setIdProd(this.getProductoSeleccionado());
+            trab2.setIdResumen(trab);
+            resumenProdFacade.create(trab2);
+            }
+            this.limpiarValores();
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Resumen trabajo creado exitosamente.", "Resumen trabajo creada exitosamente.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+
         } catch (Exception e) {
             logger.error("Error grave creando resumen trabajo.", e);
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error grave creando resumen trabajo .", "Error grave creando resumen trabajo.");
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
-    
-    
+
     public void limpiarValores() {
         try {
             this.setEstado("");
             this.setIdProducto(null);
             this.setIdTrabajador(null);
-            this.setIdDia(null);
+            this.setDiaTrabajoSeleccionado(null);
             this.setIdRes(null);
             this.setCantidad(0);
-           
-            
-            
-            
-            
+
         } catch (Exception e) {
             logger.error("Error grave limpiando valores formulario", e);
             throw new RuntimeException(e);
@@ -197,22 +198,6 @@ public class RegistrarTrabajoBean implements Serializable {
 
     public void setProductoSeleccionado(Producto productoSeleccionado) {
         this.productoSeleccionado = productoSeleccionado;
-    }
-
-    public List<DiaTrabajo> getListaDias() {
-        return listaDias;
-    }
-
-    public void setListaDias(List<DiaTrabajo> listaDias) {
-        this.listaDias = listaDias;
-    }
-
-    public DiaTrabajo getDiaSeleccionado() {
-        return diaSeleccionado;
-    }
-
-    public void setDiaSeleccionado(DiaTrabajo diaSeleccionado) {
-        this.diaSeleccionado = diaSeleccionado;
     }
 
     public List<Trabajador> getListaTrabajadores() {
@@ -237,14 +222,6 @@ public class RegistrarTrabajoBean implements Serializable {
 
     public void setIdTrabajador(Trabajador idTrabajador) {
         this.idTrabajador = idTrabajador;
-    }
-
-    public DiaTrabajo getIdDia() {
-        return idDia;
-    }
-
-    public void setIdDia(DiaTrabajo idDia) {
-        this.idDia = idDia;
     }
 
     public String getEstado() {
@@ -294,9 +271,30 @@ public class RegistrarTrabajoBean implements Serializable {
     public void setIdTrabVo(trabVO idTrabVo) {
         this.idTrabVo = idTrabVo;
     }
-    
 
-    
-   
+    public List<DiaTrabajo> getListaDiasTrabajo() {
+        return listaDiasTrabajo;
+    }
 
+    public void setListaDiasTrabajo(List<DiaTrabajo> listaDiasTrabajo) {
+        this.listaDiasTrabajo = listaDiasTrabajo;
+    }
+
+    public DiaTrabajo getDiaTrabajoSeleccionado() {
+        return diaTrabajoSeleccionado;
+    }
+
+    public void setDiaTrabajoSeleccionado(DiaTrabajo diaTrabajoSeleccionado) {
+        this.diaTrabajoSeleccionado = diaTrabajoSeleccionado;
+    }
+
+    public List<trabVO> getListaTrabSeleccionados() {
+        return ListaTrabSeleccionados;
+    }
+
+    public void setListaTrabSeleccionados(List<trabVO> ListaTrabSeleccionados) {
+        this.ListaTrabSeleccionados = ListaTrabSeleccionados;
+    }
+    
+    
 }

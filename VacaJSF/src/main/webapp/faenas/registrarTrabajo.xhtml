@@ -6,19 +6,30 @@
 
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:body>
+    
+    <h:body >
+        
         <ui:composition template="/templates/commonTemplate.xhtml">
             <ui:define name="content">
                 <h:form>
                     <p:growl id="messages" showDetail="false" sticky="false" life="5000" />
-                    <p:panel header="Ingreso nueva Faena" style="margin-bottom:20px;font-size: 11px!important;font-family: Verdana, Arial, Helvetica, sans-serif;">
-                        <h:panelGrid id="grid1" columns="3"  cellpadding="5">
-                           
-                            <p:dataTable id="clientesGrid3" var="cliente" value="#{registrarTrabajoBean.listaProductos}"  style="margin-bottom:20px" rowKey="#{cliente.idProducto}"  rows="10" paginator="true" selectionMode="single" selection="#{registrarTrabajoBean.idProducto}">
+                    <p:panel header="Ingreso nueva Faena" style="  margin-bottom:20px;font-size: 11px!important;font-family: Verdana, Arial, Helvetica, sans-serif;">
+                        <h:panelGrid   id="grid1" columns="4"  cellpadding="5">
+                            <h:outputLabel for="cbxProducto" value="Lista Productos" style="font-weight:bold; background-color: greenyellow"/> 
+                            <p:selectOneListbox id="cbxProducto" style="background-color: greenyellow" widgetVar="cbxProducto" value="#{registrarTrabajoBean.productoSeleccionado}" converter="productoConverter"  filter="true" filterMatchMode="contains">
+                                
+                                <f:selectItems value="#{registrarTrabajoBean.listaProductos}" var="producto" itemLabel="#{producto.nombre.trim()}" itemValue="#{producto}" />
+                            </p:selectOneListbox>
+                            <h:outputLabel for="cbxDia" value="Lista Diass" style="font-weight:bold; background-color: greenyellow"/> 
+                            <p:selectOneListbox id="cbxDia" style="background-color: greenyellow" widgetVar="cbxDia" value="#{registrarTrabajoBean.diaTrabajoSeleccionado}"  converter="diaConverter" filter="true" filterMatchMode="contains">
+                                <f:selectItems value="#{registrarTrabajoBean.listaDiasTrabajo}" var="dia" itemLabel="#{dia.fechaFormateada} #{dia.idFaena.descripcion}" itemValue="#{dia}" />
+                            </p:selectOneListbox>
+
+                           <!-- <p:dataTable id="clientesGrid3" var="cliente" value="#{registrarTrabajoBean.listaProductos}"  style="margin-bottom:20px" rowKey="#{cliente.idProducto}"  rows="10" paginator="true" selectionMode="single" selection="#{registrarTrabajoBean.idProducto}">
                                 <f:facet name="header">
                                     Lista de Productos
                                 </f:facet>
-                                
+
                                 <p:column headerText="Id" width="3%">
                                     <h:outputText value="#{cliente.idProducto}"/>
                                 </p:column>
@@ -31,61 +42,61 @@
                                 <p:column headerText="Valor">
                                     <h:outputText value="#{cliente.valor}"/>
                                 </p:column>
-                                
-                       
-                            </p:dataTable>
-                        
-                       </h:panelGrid>
-                            <h:panelGrid id="grid2" columns="3"  cellpadding="5">
-                            
 
-                                <p:dataTable id="clientesGrid" var="cliente2" value="#{registrarTrabajoBean.listaDias}"  rows="10" paginator="true" style="margin-bottom:20px" rowKey="#{cliente2.idDia}" selectionMode="single" selection="#{registrarTrabajoBean.idDia}">
+
+                            </p:dataTable>-->
+
+                        </h:panelGrid>
+                        <h:panelGrid id="grid2" columns="3"  cellpadding="5">
+
+
+                            <!--<p:dataTable id="clientesGrid" var="cliente2" value="#{registrarTrabajoBean.listaDiasTrabajo}"  rows="10" paginator="true" style="margin-bottom:20px" rowKey="#{cliente2.codigo}" selectionMode="single" selection="#{registrarTrabajoBean.diaTrabajoSeleccionado}">
                                 <f:facet name="header">
                                     Lista de Dias
                                 </f:facet>
-                                
+
                                 <p:column headerText="Id" width="3%">
-                                    <h:outputText value="#{cliente2.idDia}"/>
+                                    <h:outputText value="#{cliente2.codigo}"/>
                                 </p:column>
-                                    <p:column headerText="Nombre" filterBy="#{cliente2.fechaD}" filterMatchMode="contains">
-                                        <h:outputText value="#{cliente2.fechaD}"/>
+                                <p:column headerText="Nombre" filterBy="#{cliente2.fechaFormat}" filterMatchMode="contains">
+                                    <h:outputText value="#{cliente2.fechaFormat}"/>
                                 </p:column>
-                                
-                                
-                       
-                            </p:dataTable>
-                            
-               
-                       </h:panelGrid>
+
+
+
+                            </p:dataTable>-->
+
+
+                        </h:panelGrid>
                         <h:panelGrid id="grid3" columns="3"  cellpadding="5">
-                            
-                            
-                            <p:dataTable id="clientesGrid2" var="cliente"  value="#{registrarTrabajoBean.listaTrab}"  rows="10" paginator="true" style="margin-bottom:20px" rowKey="#{cliente.idTrabajador}" selectionMode="single" selection="#{registrarTrabajoBean.idTrabVo}">
-                                <f:facet name="header">
+
+
+                            <p:dataTable id="clientesGrid2"   var="cliente"  value="#{registrarTrabajoBean.listaTrab}"  rows="10" paginator="true" style="margin-bottom:20px; background-color: greenyellow" rowKey="#{cliente.idTrabajador}"  selection="#{registrarTrabajoBean.listaTrabSeleccionados}">
+                                <f:facet name="header"  >
                                     Lista de Trabajadores
-                                </f:facet>
-                                
-                                <p:column headerText="Id" width="3%">
+                                </f:facet >
+                                <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+                                <p:column headerText="Id" width="3%" style="background-color: greenyellow">
                                     <h:outputText value="#{cliente.idTrabajador.idTrabajador}"/>
                                 </p:column>
-                                
+
                                 <p:column headerText="Nombre" filterBy="#{cliente.nombreTrabajador}" filterMatchMode="contains">
                                     <h:outputText value="#{cliente.nombreTrabajador}"/>
                                 </p:column>
                                 <p:column headerText="Rut">
                                     <h:outputText value="#{cliente.rut}"/>
                                 </p:column>
-                                
+
                                 <p:column headerText="Cantidad del producto"  >
                                     <p:inputText id="nombre" value="#{cliente.cantidad}" required="true" requiredMessage="El nombre es requerido." label="Nombre"/>
-                                     
-                                    
+
+
                                 </p:column>
-                  
+
                             </p:dataTable>
-                            
-                       </h:panelGrid>
-                        <p:commandButton value="Registrar" update="messages,clientesGrid,clientesGrid2,clientesGrid3" icon="ui-icon-check" validateClient="true" actionListener="#{registrarTrabajoBean.crearResumen}" style="margin-right:10px"/>
+
+                        </h:panelGrid>
+                        <p:commandButton value="Registrar" update="messages,clientesGrid2,cbxProducto,cbxDia" icon="ui-icon-check" validateClient="true" actionListener="#{registrarTrabajoBean.crearResumen}" style="margin-right:10px"/>
                     </p:panel>
                 </h:form>
             </ui:define>

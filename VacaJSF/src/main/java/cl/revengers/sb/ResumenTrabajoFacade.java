@@ -54,5 +54,7 @@ public class ResumenTrabajoFacade extends AbstractFacade<ResumenTrabajo> impleme
             query = null;
         }
     }
+    
+   
 
 }

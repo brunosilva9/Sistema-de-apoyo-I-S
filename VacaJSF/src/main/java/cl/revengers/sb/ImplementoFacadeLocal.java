@@ -16,7 +16,7 @@ import javax.ejb.Local;
 
 /**
  *
- * @author Esteban Perez
+
  */
 @Local
 public interface ImplementoFacadeLocal {

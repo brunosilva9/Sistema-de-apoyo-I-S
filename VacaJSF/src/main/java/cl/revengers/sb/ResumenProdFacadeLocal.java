@@ -29,5 +29,6 @@ public interface ResumenProdFacadeLocal {
     List<ResumenProductos> findRange(int[] range);
 
     int count();
+    public List<ResumenProductos> obtenerResrPorDia(int idDia);
  
 }

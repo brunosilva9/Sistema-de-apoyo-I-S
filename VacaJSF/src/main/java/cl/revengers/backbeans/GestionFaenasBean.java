@@ -6,7 +6,10 @@
 package cl.revengers.backbeans;
 
 import cl.revengers.entities.Faena;
+import cl.revengers.entities.Trabajador;
 import cl.revengers.sb.FaenaFacadeLocal;
+import cl.revengers.sb.TrabajadorFacadeLocal;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -25,10 +28,13 @@ public class GestionFaenasBean implements Serializable {
 
     @EJB
     private FaenaFacadeLocal faenaFacade;
+    @EJB
+    private TrabajadorFacadeLocal trabFacade;
 
     private final static Logger logger = Logger.getLogger(GestionTrabajadoresBean.class);
 
     private List<Faena> listaFaenas;
+    private List<Trabajador> listaTrab;
     private Faena faenaSeleccionada;
     private String rutBusqueda;
     private String dvBusqueda;
@@ -104,6 +110,18 @@ public class GestionFaenasBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
+    
+    public void listarTrab() {
+        try {
+             listaTrab = trabFacade.obtenerTrabajadorPorFaena(faenaSeleccionada.getIdFaena());
+            
+
+        } catch (Exception e) {
+            logger.error("Error grave listando resumen de trabajos", e);
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error grave listando resumen de trabajos.", "Error grave listando resumen de trabajos.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+    }
 
     public void setListaFaenas(List<Faena> listaFaenas) {
         this.listaFaenas = listaFaenas;
@@ -137,6 +155,15 @@ public class GestionFaenasBean implements Serializable {
     public String getDvBusqueda() {
         return dvBusqueda;
     }
+
+    public List<Trabajador> getListaTrab() {
+        return listaTrab;
+    }
+
+    public void setListaTrab(List<Trabajador> listaTrab) {
+        this.listaTrab = listaTrab;
+    }
+    
 
   
 }

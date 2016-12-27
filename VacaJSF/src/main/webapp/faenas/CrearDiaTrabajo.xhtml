@@ -14,11 +14,11 @@
                     <p:panel header="Ingreso nueva Faena" style="margin-bottom:20px;font-size: 11px!important;font-family: Verdana, Arial, Helvetica, sans-serif;">
                         <h:panelGrid id="grid" columns="3"  cellpadding="5">
                             <h:outputLabel for="descripcion" value="Costo de Supervision(*):" style="font-weight:bold"/>                    
-                            <p:inputText id="descripcion" value="#{crearDiaTrabajoBean.costoSuper}" required="true" requiredMessage="La descripcion es requerida." label="Descripcion"/>
+                            <p:inputText id="descripcion" value="#{crearDiaTrabajoBean.costoSuper}" required="true" requiredMessage="El costo de supervision es requerido, si no hay costo coloque un 0" label="Descripcion"/>
                             <p:message for="descripcion" />
 
                             <h:outputLabel for="ubicacion" value="Costo Transporte(*):" style="font-weight:bold"/>                    
-                            <p:inputText id="ubicacion" value="#{crearDiaTrabajoBean.costoTran}" required="true" requiredMessage="El apellido es requerido." label="Ubicacion" />
+                            <p:inputText id="ubicacion" value="#{crearDiaTrabajoBean.costoTran}" required="true" requiredMessage="El costo de transporte es requerido, si no hay costo coloque un 0" label="Ubicacion" />
                             <p:message for="ubicacion" />
 
                                                     
