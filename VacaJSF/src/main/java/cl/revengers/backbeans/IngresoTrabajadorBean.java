@@ -18,7 +18,7 @@ import org.apache.log4j.Logger;
 
 /**
  *
- * @author Esteban Perez INNOVA-TI
+ * 
  */
 @Named(value = "ingresoTrabajadorBean")
 @ViewScoped
@@ -45,6 +45,31 @@ public class IngresoTrabajadorBean implements Serializable {
     public void agregarTrabajador() {
         Trabajador trab = null;
         try {
+            
+            
+           try{ 
+            if (Integer.parseInt(this.getTelefonoTrabajador())<0) {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Numero de telefono incorrecto", "Error: Numero de telefono incorrecto.");
+                FacesContext.getCurrentInstance().addMessage(null, message);
+                return;
+                
+            }
+            if (this.getRutTrabajador()>999999999) {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Rut incorrecto", "Error: Numero de telefono incorrecto.");
+                FacesContext.getCurrentInstance().addMessage(null, message);
+                return;
+                
+            }
+            if (this.getRutTrabajador()<1000000) {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Rut incorrecto", "Error: Numero de telefono incorrecto.");
+                FacesContext.getCurrentInstance().addMessage(null, message);
+                return;
+                
+            }
+           } catch (Exception e) {
+            logger.error("Error grave limpiando valores formulario", e);
+            throw new RuntimeException(e);
+        }
 
             trab = trabajadorFacade.getTrabajadorByRut(this.getRutTrabajador());
 
@@ -65,13 +90,13 @@ public class IngresoTrabajadorBean implements Serializable {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Trabajador creado exitosamente.", "Trabajador creado exitosamente.");
                 FacesContext.getCurrentInstance().addMessage(null, message);
             } else {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error, trabajador ya existe en base de datos.", "Error, trabajador ya existe en base de datos.");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error, trabajador ya existe.", "Error, trabajador ya existe en base de datos.");
                 FacesContext.getCurrentInstance().addMessage(null, message);
             }
 
         } catch (Exception e) {
             logger.error("Error grave creando trabajador.", e);
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error grave creando trabajador.", "Error grave creando trabajador.");
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error, Es posible que alguno de sus campos este incorrecto.", "Error, Es posible que alguno de sus campos este incorrecto.");
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }

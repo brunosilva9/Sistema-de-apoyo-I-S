@@ -59,7 +59,7 @@ and open the template in the editor.
 
         <f:facet name="options">
             <h:outputText value="Bienvenido: #{loginBean.usuarioSessionado.username}  "/>
-            <p:commandButton value="Logout" icon="ui-icon-extlink" action="#{loginBean.logout}" type="submit"/>
+            <p:commandButton value="Logout" icon="ui-icon-extlink" action="#{loginBean.logout}" type="submit" disabled="true"/>
         </f:facet>
     </p:menubar>
 </ui:composition>

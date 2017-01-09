@@ -98,7 +98,7 @@ y los objetos que viven dentro de el puedan enviarse por bytes y reconstruirse e
                 FacesContext.getCurrentInstance().addMessage(null, message);
                 return "login";
             }
-
+            
             message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido " + this.getUsuarioSessionado().getUsername().trim() + "!", this.getUsername());
             FacesContext.getCurrentInstance().addMessage(null, message);
             context.addCallbackParam("loggedIn", loggedIn);

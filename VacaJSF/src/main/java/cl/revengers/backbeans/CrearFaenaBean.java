@@ -48,7 +48,11 @@ public class CrearFaenaBean implements Serializable {
     public void crearFaena() {
         Faena trab = null;
         try {
-
+                if (this.getIdCliente() == null) {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Debe seleccionar un Cliente.", "Error: Debe seleccionar un cliente.");
+                FacesContext.getCurrentInstance().addMessage(null, message);
+                return;
+            }
                 trab = new Faena();
                 trab.setIdFaena(0);
                 trab.setIdCliente(this.getIdCliente());

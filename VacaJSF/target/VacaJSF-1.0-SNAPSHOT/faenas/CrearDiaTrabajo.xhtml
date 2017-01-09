@@ -9,33 +9,14 @@
     <h:body>
         <ui:composition template="/templates/commonTemplate.xhtml">
             <ui:define name="content">
-                <h:form>
+                <h:form id="mainform">
                     <p:growl id="messages" showDetail="false" sticky="false" life="5000" />
-                    <p:panel header="Ingreso nueva Faena" style="margin-bottom:20px;font-size: 11px!important;font-family: Verdana, Arial, Helvetica, sans-serif;">
-                        <h:panelGrid id="grid" columns="3"  cellpadding="5">
-                            <h:outputLabel for="descripcion" value="Costo de Supervision(*):" style="font-weight:bold"/>                    
-                            <p:inputText id="descripcion" value="#{crearDiaTrabajoBean.costoSuper}" required="true" requiredMessage="El costo de supervision es requerido, si no hay costo coloque un 0" label="Descripcion"/>
-                            <p:message for="descripcion" />
-
-                            <h:outputLabel for="ubicacion" value="Costo Transporte(*):" style="font-weight:bold"/>                    
-                            <p:inputText id="ubicacion" value="#{crearDiaTrabajoBean.costoTran}" required="true" requiredMessage="El costo de transporte es requerido, si no hay costo coloque un 0" label="Ubicacion" />
-                            <p:message for="ubicacion" />
-
-                                                    
-
-                            <h:outputLabel for="fechaIni" value="Fecha de Inicio" style="font-weight:bold"/>                 
-                            <p:calendar  id="fechaIni" value="#{crearDiaTrabajoBean.fecha}" pattern="dd-MM-yyyy" mask="true" required="true" requiredMessage="Error: La fecha del dia es obligatoria." />
-                            <p:message for="fechaIni" />
-                            
-                            
-                            
-                           
-                        </h:panelGrid>
+                    <p:panel header="Ingreso nuevo dia de trabajo" style="margin-bottom:20px;font-size: 11px!important;font-family: Verdana, Arial, Helvetica, sans-serif;">
                         <h:panelGrid id="grid2" columns="4"  cellpadding="5">
                             
                             
                         
-                            <p:dataTable id="clientesGrid" var="faena" value="#{gestionFaenasBean.listaFaenas}"  style="margin-bottom:20px" rowKey="#{faena.idFaena}" selectionMode="single" selection="#{crearDiaTrabajoBean.idFaena}">
+                            <p:dataTable id="clientesGrid" var="faena" value="#{gestionFaenasBean.listaFaenas}" style="margin-bottom:20px" rowKey="#{faena.idFaena}" selectionMode="single"  selection="#{crearDiaTrabajoBean.idFaena}">
                                 <f:facet name="header">
                                     Lista de Clientes
                                 </f:facet>
@@ -66,14 +47,38 @@
                               
                               
                                 
-                                
+                           
+                            
+                                <p:ajax  event="rowSelect" update=":#{p:component('fechaIni')}" />
+                    
                             </p:dataTable>
                             
                         
                            
                             
                        </h:panelGrid>
-                        <p:commandButton value="Registrar" update="messages,descripcion,ubicacion,fechaIni,clientesGrid" icon="ui-icon-check" validateClient="true" actionListener="#{crearDiaTrabajoBean.crearDiaTrabajo}" style="margin-right:10px"/>
+                        <h:panelGrid id="grid" columns="3"  cellpadding="10">
+                            <h:outputLabel for="descripcion" value="Costo de Supervision(*):" style="font-weight:bold"/>                    
+                            <p:inputText id="descripcion" value="#{crearDiaTrabajoBean.costoSuper}" required="true" requiredMessage="El costo de supervision es requerido, si no hay costo coloque un 0" label="Descripcion"/>
+                            <p:message for="descripcion" />
+
+                            <h:outputLabel for="ubicacion" value="Costo Transporte(*):" style="font-weight:bold"/>                    
+                            <p:inputText id="ubicacion" value="#{crearDiaTrabajoBean.costoTran}" required="true" requiredMessage="El costo de transporte es requerido, si no hay costo coloque un 0" label="Ubicacion" />
+                            <p:message for="ubicacion" />
+
+                                                    
+
+                            <h:outputLabel for="fechaIni" value="Fecha de Inicio" style="font-weight:bold"/>                 
+                            <p:calendar  id="fechaIni" value="#{crearDiaTrabajoBean.fecha}" mindate="#{crearDiaTrabajoBean.idFaena.fechIni}"  maxdate="#{crearDiaTrabajoBean.idFaena.fechTer}" pattern="dd-MM-yyyy" mask="true" required="true" requiredMessage="Error: La fecha del dia es obligatoria." />
+                                
+                            <p:message for="fechaIni" />
+                            
+                            
+                            
+                           
+                        </h:panelGrid>
+                        
+                        <p:commandButton value="Registrar" update="messages,descripcion,ubicacion,fechaIni,clientesGrid" icon="ui-icon-check" validateClient="true" actionListener="#{crearDiaTrabajoBean.crearDiaTrabajo}" style="margin-right:15px"/>
                     </p:panel>
                 </h:form>
             </ui:define>

@@ -18,19 +18,21 @@
                             <p:message for="descripcion" />
 
                             <h:outputLabel for="ubicacion" value="Ubicacion(*):" style="font-weight:bold"/>                    
-                            <p:inputText id="ubicacion" value="#{crearFaenaBean.ubicacion}" required="true" requiredMessage="El apellido es requerido." label="Ubicacion" />
+                            <p:inputText id="ubicacion" value="#{crearFaenaBean.ubicacion}" required="true" requiredMessage="La ubicacion es requerido." label="Ubicacion" />
                             <p:message for="ubicacion" />
 
                                                     
 
-                            <h:outputLabel for="fechaIni" value="Fecha de Inicio" style="font-weight:bold"/>                 
-                            <p:calendar  id="fechaIni" value="#{crearFaenaBean.fechaInicio}"  maxdate="today" pattern="dd-MM-yyyy" mask="true" required="true" requiredMessage="Error: La fecha de inicio  es obligatoria." />
+                            <h:outputLabel for="fechaIni" value="Fecha de Inicio(*)" style="font-weight:bold"/>                 
+                            <p:calendar  id="fechaIni" value="#{crearFaenaBean.fechaInicio}"  pattern="dd-MM-yyyy" mask="true" required="true" requiredMessage="Error: La fecha de inicio  es obligatoria." >
+                                <p:ajax event="dateSelect" update="fechaTer" />
+                            </p:calendar>    
                             <p:message for="fechaIni" />
                             
                             <h:outputLabel for="fechaTer" value="Fecha de Termino" style="font-weight:bold"/> 
                             
                                 
-                                <p:calendar  id="fechaTer" value="#{crearFaenaBean.fechaTermino}" pattern="dd-MM-yyyy" mask="true"  />
+                            <p:calendar  id="fechaTer" value="#{crearFaenaBean.fechaTermino}" pattern="dd-MM-yyyy" mask="true" mindate="#{crearFaenaBean.fechaInicio}"  />
                             
                             
                             <p:message for="fechaTer" />

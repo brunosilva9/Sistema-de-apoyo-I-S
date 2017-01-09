@@ -54,10 +54,10 @@ public class GestionFaenasBean implements Serializable {
         try {
             Faena trab = (Faena) event.getObject();
             faenaFacade.edit(trab);
-            FacesMessage msg = new FacesMessage("Trabajador editado exitosamente.", ((Faena) event.getObject()).getIdFaena().toString());
+            FacesMessage msg = new FacesMessage("Faena editada exitosamente.", ((Faena) event.getObject()).getIdFaena().toString());
             FacesContext.getCurrentInstance().addMessage(":templateForm:formGrillaTrab:mensajePantallaGrilla", msg);
         } catch (Exception e) {
-            logger.error("Error grave editando trabajador.", e);
+            logger.error("Error  editando Faena.", e);
         }
     }
 
@@ -69,7 +69,7 @@ public class GestionFaenasBean implements Serializable {
                 this.getListaFaenas().remove(this.getFaenaSeleccionada());
                 faenaFacade.remove(this.getFaenaSeleccionada());
                 this.faenaSeleccionada = null;
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Faena eliminado exitosamente.", "Faena eliminado exitosamente.");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Faena eliminada exitosamente.", "Faena eliminada exitosamente.");
                 FacesContext.getCurrentInstance().addMessage(":templateForm:formGrillaTrab:mensajePantallaGrilla", message);
             } else {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Debe seleccionar al menos una Faena de la tabla.", "Debe seleccionar al menos un Trabajador de la tabla.");
@@ -97,7 +97,7 @@ public class GestionFaenasBean implements Serializable {
                 this.setFaenaSeleccionada(null);
                 
 
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Faena actualizaa exitosamente.", "Faena actualizada exitosamente.");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Faena actualizada exitosamente.", "Faena actualizada exitosamente.");
                 FacesContext.getCurrentInstance().addMessage(null, message);
 
             } else {
@@ -113,7 +113,15 @@ public class GestionFaenasBean implements Serializable {
     
     public void listarTrab() {
         try {
+             
              listaTrab = trabFacade.obtenerTrabajadorPorFaena(faenaSeleccionada.getIdFaena());
+             
+             if (listaTrab.isEmpty()) {
+                
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "No hay trabajadores en esta faena.", "No hay trabajadores en esta faena.");
+                FacesContext.getCurrentInstance().addMessage(null, message);
+                return;
+            }
             
 
         } catch (Exception e) {
