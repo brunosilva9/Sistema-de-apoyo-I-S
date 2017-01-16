@@ -59,17 +59,17 @@
                        </h:panelGrid>
                         <h:panelGrid id="grid" columns="3"  cellpadding="10">
                             <h:outputLabel for="descripcion" value="Costo de Supervision(*):" style="font-weight:bold"/>                    
-                            <p:inputText id="descripcion" value="#{crearDiaTrabajoBean.costoSuper}" required="true" requiredMessage="El costo de supervision es requerido, si no hay costo coloque un 0" label="Descripcion"/>
+                            <p:inputText id="descripcion" value="#{crearDiaTrabajoBean.costoSuper}" required="true" requiredMessage="El costo de supervision es requerido, si no hay costo coloque un 0" label="Descripcion" onkeypress="if( (event.which &lt; 48 || event.which &gt; 57) ) return false;"/>
                             <p:message for="descripcion" />
 
                             <h:outputLabel for="ubicacion" value="Costo Transporte(*):" style="font-weight:bold"/>                    
-                            <p:inputText id="ubicacion" value="#{crearDiaTrabajoBean.costoTran}" required="true" requiredMessage="El costo de transporte es requerido, si no hay costo coloque un 0" label="Ubicacion" />
+                            <p:inputText id="ubicacion" value="#{crearDiaTrabajoBean.costoTran}" required="true" requiredMessage="El costo de transporte es requerido, si no hay costo coloque un 0" label="Ubicacion" onkeypress="if( (event.which &lt; 48 || event.which &gt; 57) ) return false;"/>
                             <p:message for="ubicacion" />
 
                                                     
 
                             <h:outputLabel for="fechaIni" value="Fecha de Inicio" style="font-weight:bold"/>                 
-                            <p:calendar  id="fechaIni" value="#{crearDiaTrabajoBean.fecha}" mindate="#{crearDiaTrabajoBean.idFaena.fechIni}"  maxdate="#{crearDiaTrabajoBean.idFaena.fechTer}" pattern="dd-MM-yyyy" mask="true" required="true" requiredMessage="Error: La fecha del dia es obligatoria." />
+                            <p:calendar  id="fechaIni" value="#{crearDiaTrabajoBean.fecha}" timeZone="Chile/Continental" mindate="#{crearDiaTrabajoBean.idFaena.fechIni}"  maxdate="#{crearDiaTrabajoBean.idFaena.fechTer}" pattern="dd-MM-yyyy" mask="true" required="true" requiredMessage="Error: La fecha del dia es obligatoria." />
                                 
                             <p:message for="fechaIni" />
                             

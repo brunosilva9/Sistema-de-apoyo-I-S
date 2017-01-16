@@ -135,7 +135,7 @@ public class RegistrarTrabajoBean implements Serializable {
                 return;
             }
 
-            if (this.ListaTrabSeleccionados== null) {
+            if (this.ListaTrabSeleccionados== null || this.ListaTrabSeleccionados.isEmpty()) {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Debe seleccionar un Trabajador.", "Error: Debe seleccionar un Trabajador.");
                 FacesContext.getCurrentInstance().addMessage(null, message);
                 return;

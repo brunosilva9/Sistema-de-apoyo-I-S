@@ -10,7 +10,7 @@
             <h:body>
                 <h:form id="formGrillaTrab">
                     <p:growl id="mensajePantallaGrilla" showDetail="false" sticky="false" life="5000" /> 
-                    <p:panel header="Gestion de Faenas" style="margin-bottom:20px;font-size: 11px!important;font-family: Verdana, Arial, Helvetica, sans-serif;">
+                    <p:panel header="Gestion de dias de faena" style="margin-bottom:20px;font-size: 11px!important;font-family: Verdana, Arial, Helvetica, sans-serif;">
                         <h:panelGrid id="grid" columns="1">
                             <p:dataTable id="clientesGrid" var="diaTrabajo" value="#{gestionDiaBean.listaDias}" paginator="true" editable="true" style="margin-bottom:20px" rowKey="#{diaTrabajo.idDia}"  sortBy="#{diaTrabajo.fechaD}" selectionMode="single" selection="#{gestionDiaBean.diaSeleccionado}" >
                                 <f:facet name="header">
@@ -39,7 +39,7 @@
                                 <p:column headerText="Fecha" filterBy="#{diaTrabajo.fechaD}" filterMatchMode="contains">
                                     <p:cellEditor>
                                         <f:facet name="output"><h:outputText value="#{diaTrabajo.fechaD}"><f:convertDateTime pattern="dd-MM-yyyy"/></h:outputText></f:facet>
-                                        <f:facet name="input"><p:calendar id="txtFechNac" value="#{diaTrabajo.fechaD}" pattern="dd-MM-yyyy" mask="true" required="true" requiredMessage="Error: La fecha de inicio es obligatoria." /></f:facet>
+                                        <f:facet name="input"><p:calendar id="txtFechNac" value="#{diaTrabajo.fechaD}" timeZone="Chile/Continental" pattern="dd-MM-yyyy" mask="true" required="true" requiredMessage="Error: La fecha de inicio es obligatoria." /></f:facet>
                                     </p:cellEditor>
                                 </p:column>
                                 

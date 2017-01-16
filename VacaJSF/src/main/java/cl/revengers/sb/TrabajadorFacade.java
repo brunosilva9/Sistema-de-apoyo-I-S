@@ -10,6 +10,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import org.apache.log4j.Logger;
@@ -44,6 +45,8 @@ public class TrabajadorFacade extends AbstractFacade<Trabajador> implements Trab
             Trabajador trab = (Trabajador) query.getSingleResult();
             return trab;
         }catch(NoResultException e){
+            return null;
+        }catch(NonUniqueResultException e){
             return null;
         }catch(Exception e){
             logger.error("Error grave obteniendo trabajador para Rut: " + rutTrabajador, e);

@@ -13,20 +13,21 @@
                     <p:growl id="messages" showDetail="false" sticky="false" life="5000" />
                     <p:panel header="Ingreso nuevo cliente" style="margin-bottom:20px;font-size: 11px!important;font-family: Verdana, Arial, Helvetica, sans-serif;">
                         <h:panelGrid id="grid" columns="3"  cellpadding="5">
-                            
+
                             <h:outputLabel for="nombre" value="Nombre(*):" style="font-weight:bold"/>                    
                             <p:inputText id="nombre" value="#{ingresoClienteBean.nombreCliente}" required="true" requiredMessage="El nombre es requerido." label="Nombre"/>
                             <p:message for="nombre" />
 
-                                                
+
 
                             <h:outputLabel for="rut" value="Rut(*):" style="font-weight:bold"/>                    
-                            <p:inputText  id="rut" value="#{ingresoClienteBean.rut}" required="true"  requiredMessage="el rut es requerido." label="Rut">
+                            <p:inputText  id="rut" value="#{ingresoClienteBean.rut}" required="true" onkeypress="if( (event.which &lt; 48 || event.which &gt; 57) ) return false;" requiredMessage="el rut es requerido." label="Rut">
+                               
                             </p:inputText>
                             <p:message for="rut" />
 
-                            
-                         </h:panelGrid>
+
+                        </h:panelGrid>
                         <p:commandButton value="Registrar" update="messages,nombre,rut" icon="ui-icon-check" validateClient="true" actionListener="#{ingresoClienteBean.agregarCliente}" style="margin-right:10px"/>
                     </p:panel>
                 </h:form>

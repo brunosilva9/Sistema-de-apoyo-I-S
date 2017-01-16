@@ -119,7 +119,7 @@ public class GestionFaenasBean implements Serializable {
              if (listaTrab.isEmpty()) {
                 
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "No hay trabajadores en esta faena.", "No hay trabajadores en esta faena.");
-                FacesContext.getCurrentInstance().addMessage(null, message);
+                FacesContext.getCurrentInstance().addMessage(":mensajePantallaGrilla:mensajePantallaGrilla", message);
                 return;
             }
             

@@ -18,7 +18,6 @@ import javax.faces.view.ViewScoped;
 import org.apache.log4j.Logger;
 import org.primefaces.event.RowEditEvent;
 
-
 @Named(value = "gestionTrabajadoresBean")
 @ViewScoped
 public class GestionTrabajadoresBean implements Serializable {
@@ -47,9 +46,22 @@ public class GestionTrabajadoresBean implements Serializable {
     public void onRowEdit(RowEditEvent event) {
         try {
             Trabajador trab = (Trabajador) event.getObject();
-            trabajadorFacade.edit(trab);
-            FacesMessage msg = new FacesMessage("Trabajador editado exitosamente.", ((Trabajador) event.getObject()).getIdTrabajador().toString());
-            FacesContext.getCurrentInstance().addMessage(":templateForm:formGrillaTrab:mensajePantallaGrilla", msg);
+            Trabajador trabajadorBusc = trabajadorFacade.getTrabajadorByRut(trab.getRut());
+            if (trabajadorBusc != null && (trab.getIdTrabajador().intValue() != trabajadorBusc.getIdTrabajador().intValue())) {
+                FacesMessage msg = new FacesMessage("Error: Ya existe un trabajador con el rut Ingresado", "Error: Ya existe un trabajador con el rut Ingresado");
+                FacesContext.getCurrentInstance().addMessage(":templateForm:formGrillaTrab:mensajePantallaGrilla", msg);
+            } else {
+                if (trab.getRut() != 0) {
+                    trabajadorFacade.edit(trab);
+                    FacesMessage msg = new FacesMessage("Trabajador editado exitosamente.", ((Trabajador) event.getObject()).getIdTrabajador().toString());
+                    FacesContext.getCurrentInstance().addMessage(":templateForm:formGrillaTrab:mensajePantallaGrilla", msg);
+                } else {
+                    FacesMessage msg = new FacesMessage("Error: Rut no válido", "Error: Rut no válido");
+                    FacesContext.getCurrentInstance().addMessage(":templateForm:formGrillaTrab:mensajePantallaGrilla", msg);
+                }
+
+            }
+
         } catch (Exception e) {
             logger.error("Error grave editando trabajador.", e);
         }

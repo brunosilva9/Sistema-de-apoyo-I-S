@@ -20,13 +20,14 @@ import org.primefaces.context.RequestContext;
 
 /**
  *
-
+ *
  */
 @Named(value = "loginBean")
 /*  aki llega todo */
  /* Nombre por el cual el bean debe ser referenciado en las vistas */
-@SessionScoped /* Los valores guardados en el Bean durarán durante toda la sesion HTTP */
-/*  */
+@SessionScoped
+/* Los valores guardados en el Bean durarán durante toda la sesion HTTP */
+ /*  */
 public class LoginBean implements Serializable /*  no tengo que saberlo */ /*Si debes saberlo, se deja Serializable para que el mismo bean
 y los objetos que viven dentro de el puedan enviarse por bytes y reconstruirse en la vista*/ {
 
@@ -87,6 +88,19 @@ y los objetos que viven dentro de el puedan enviarse por bytes y reconstruirse e
             }
             Login log = loginFacade.getLogin(this.getUsername().trim(), this.getPassword().trim());
 
+            if (log != null) {
+                boolean exactMatch = false;
+
+                if (log.getUsername().trim().equals(this.getUsername().trim()) && log.getPass().trim().equals(this.getPassword().trim())) {
+                    exactMatch = true;
+                }
+
+                if (!exactMatch) {
+                    message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Nombre de usuario o contraseña no validos.", "Nombre de usuario o contraseña no validos.");
+                    FacesContext.getCurrentInstance().addMessage(null, message);
+                    return "login";
+                }
+            }
             /*
            
             * Dejaremos el usuario sesionado en esta variable para poder acceder a este desde otros bean
@@ -98,7 +112,7 @@ y los objetos que viven dentro de el puedan enviarse por bytes y reconstruirse e
                 FacesContext.getCurrentInstance().addMessage(null, message);
                 return "login";
             }
-            
+
             message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido " + this.getUsuarioSessionado().getUsername().trim() + "!", this.getUsername());
             FacesContext.getCurrentInstance().addMessage(null, message);
             context.addCallbackParam("loggedIn", loggedIn);
@@ -116,7 +130,7 @@ y los objetos que viven dentro de el puedan enviarse por bytes y reconstruirse e
             /*
              * Para el caso del logout dejamos la sesion HTTP del usuario invalida, dejamos el login
             *  de este Bean en null y volvemos al Login
-            */
+             */
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
             session.invalidate();
             this.password = "";

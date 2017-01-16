@@ -26,13 +26,13 @@
                             <p:message for="apellidom" />                          
 
                             <h:outputLabel for="rut" value="Rut(*):" style="font-weight:bold"/>                    
-                            <p:inputText id="rut" value="#{ingresoTrabajadorBean.rutTrabajador}" required="true"  requiredMessage="El rut es requerido." label="rut">
+                            <p:inputText id="rut" value="#{ingresoTrabajadorBean.rutTrabajador}" required="true" onkeypress="if( (event.which &lt; 48 || event.which &gt; 57) ) return false;" requiredMessage="El rut es requerido." label="rut">
                                
                             </p:inputText>
                             <p:message for="rut" />
 
                             <h:outputLabel for="telefono" value="Telefono(*):" style="font-weight:bold"/>                    
-                            <p:inputText id="telefono" value="#{ingresoTrabajadorBean.telefonoTrabajador}" required="true" requiredMessage="El Telefono es requerido." label="Telefono" />
+                            <p:inputText id="telefono" value="#{ingresoTrabajadorBean.telefonoTrabajador}" required="true" requiredMessage="El Telefono es requerido." label="Telefono" onkeypress="if( (event.which &lt; 48 || event.which &gt; 57) ) return false;"/>
                                 
                             <p:message for="telefono" />
 
@@ -43,7 +43,7 @@
 
                             <h:outputLabel for="date" value="Fecha de Nacimiento" style="font-weight:bold"/>                 
                                            
-                            <p:calendar  id="date" value="#{ingresoTrabajadorBean.fechaNacimientoTrabajador}" maxdate="today" pattern="dd-MM-yyyy" mask="true" required="true" requiredMessage="Error: La fecha de inicio  es obligatoria." />
+                            <p:calendar  id="date" value="#{ingresoTrabajadorBean.fechaNacimientoTrabajador}" timeZone="Chile/Continental" maxdate="today" pattern="dd-MM-yyyy" mask="true" required="true" requiredMessage="Error: La fecha de inicio  es obligatoria." />
                             
                             <p:message for="date" />
                         </h:panelGrid>

@@ -57,8 +57,7 @@ public class PagosBean implements Serializable {
     public void setRutBusqueda(String rutBusqueda) {
         this.rutBusqueda = rutBusqueda;
     }
-    
-   /* public void setRutBusqueda2(String rutBusqueda) {
+    public void setRutBusqueda2(String rutBusqueda) {
         
         this.rutBusqueda = rutBusqueda.replace(".","");
         rutS=this.rutBusqueda.split("-");
@@ -66,7 +65,7 @@ public class PagosBean implements Serializable {
         this.rutBusqueda=this.rutBusqueda.substring(0,8);
         
         
-    }*/
+    }
 
     public String getDvBusqueda() {
         return dvBusqueda;
@@ -102,7 +101,7 @@ public class PagosBean implements Serializable {
 
     public void listarTrabajos() {
         try {
-            setRutBusqueda(this.rutBusqueda);
+            setRutBusqueda2(this.rutBusqueda);
             List<ResumenTrabajo> listaResumenesPorTrabajador = resumenTrabajoFacade.obtenerResumenesPorTrabajador(Integer.parseInt(this.getRutBusqueda()));
             List<ResumenTrabajoVO> listaResumenTrabajoVO = new ArrayList<>();
             ResumenTrabajoVO resTrabVO = null;

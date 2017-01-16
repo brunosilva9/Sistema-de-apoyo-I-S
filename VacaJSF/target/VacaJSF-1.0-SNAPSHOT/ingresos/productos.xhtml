@@ -20,12 +20,12 @@
                                                 
 
                             <h:outputLabel for="valor" value="valor venta $(*):" style="font-weight:bold"/>                    
-                            <p:inputText  id="valor" value="#{ingresoProductoBean.valor}" required="true"  requiredMessage="la vida util es requerida." label="Valor">
+                            <p:inputText  id="valor" value="#{ingresoProductoBean.valor}" required="true"  requiredMessage="la vida util es requerida." label="Valor" onkeypress="if( (event.which &lt; 48 || event.which &gt; 57) ) return false;">
                             </p:inputText>
                             <p:message for="valor" />
                             
                             <h:outputLabel for="valorp" value="valor a pagar$(*):" style="font-weight:bold"/>                    
-                            <p:inputText  id="valorp" value="#{ingresoProductoBean.valorp}" required="true"  requiredMessage="la vida util es requerida." label="Valorp">
+                            <p:inputText  id="valorp" value="#{ingresoProductoBean.valorp}" required="true"  requiredMessage="la vida util es requerida." label="Valorp" onkeypress="if( (event.which &lt; 48 || event.which &gt; 57) ) return false;">
                             </p:inputText>
                             <p:message for="valorp" />
 

@@ -20,7 +20,7 @@
                                 
                                 <f:selectItems value="#{registrarTrabajoBean.listaProductos}" var="producto" itemLabel="#{producto.nombre.trim()}" itemValue="#{producto}" />
                             </p:selectOneListbox>
-                            <h:outputLabel for="cbxDia" value="Lista Diass" style="font-weight:bold; background-color: greenyellow"/> 
+                            <h:outputLabel for="cbxDia" value="Lista Dias" style="font-weight:bold; background-color: greenyellow"/> 
                             <p:selectOneListbox id="cbxDia" style="background-color: greenyellow" widgetVar="cbxDia" value="#{registrarTrabajoBean.diaTrabajoSeleccionado}"  converter="diaConverter" filter="true" filterMatchMode="contains">
                                 <f:selectItems value="#{registrarTrabajoBean.listaDiasTrabajo}" var="dia" itemLabel="#{dia.fechaFormateada} #{dia.idFaena.descripcion}" itemValue="#{dia}" />
                             </p:selectOneListbox>

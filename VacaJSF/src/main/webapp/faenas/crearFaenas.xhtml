@@ -24,7 +24,7 @@
                                                     
 
                             <h:outputLabel for="fechaIni" value="Fecha de Inicio(*)" style="font-weight:bold"/>                 
-                            <p:calendar  id="fechaIni" value="#{crearFaenaBean.fechaInicio}"  pattern="dd-MM-yyyy" mask="true" required="true" requiredMessage="Error: La fecha de inicio  es obligatoria." >
+                            <p:calendar  id="fechaIni" value="#{crearFaenaBean.fechaInicio}"  pattern="dd-MM-yyyy" timeZone="Chile/Continental" mask="true" required="true" requiredMessage="Error: La fecha de inicio  es obligatoria." >
                                 <p:ajax event="dateSelect" update="fechaTer" />
                             </p:calendar>    
                             <p:message for="fechaIni" />
@@ -32,7 +32,7 @@
                             <h:outputLabel for="fechaTer" value="Fecha de Termino" style="font-weight:bold"/> 
                             
                                 
-                            <p:calendar  id="fechaTer" value="#{crearFaenaBean.fechaTermino}" pattern="dd-MM-yyyy" mask="true" mindate="#{crearFaenaBean.fechaInicio}"  />
+                            <p:calendar  id="fechaTer" value="#{crearFaenaBean.fechaTermino}" timeZone="Chile/Continental" pattern="dd-MM-yyyy" mask="true" mindate="#{crearFaenaBean.fechaInicio}"  />
                             
                             
                             <p:message for="fechaTer" />

@@ -29,14 +29,14 @@
                                 <p:column headerText="Valor">
                                     <p:cellEditor>
                                         <f:facet name="output"><h:outputText value="#{producto.valor}"/></f:facet>
-                                        <f:facet name="input"><p:inputText value="#{producto.valor}" style="width:100%" label="Nombre" required="true" requiredMessage="Error: Nombre del Trabajador es obligatoria."/></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{producto.valor}" style="width:100%" label="Nombre" required="true"  onkeypress="if( (event.which &lt; 48 || event.which &gt; 57) ) return false;" requiredMessage="Error: Nombre del Trabajador es obligatoria."/></f:facet>
                                     </p:cellEditor>
                                 </p:column>
                                 
                                 <p:column headerText="Precio de pago">
                                     <p:cellEditor>
                                         <f:facet name="output"><h:outputText value="#{producto.precioP}"/></f:facet>
-                                        <f:facet name="input"><p:inputText value="#{producto.precioP}" style="width:100%" label="Nombre" required="true" requiredMessage="Error: Nombre del Trabajador es obligatoria."/></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{producto.precioP}" style="width:100%" label="Nombre" onkeypress="if( (event.which &lt; 48 || event.which &gt; 57) ) return false;" required="true" requiredMessage="Error: Nombre del Trabajador es obligatoria."/></f:facet>
                                     </p:cellEditor>
                                 </p:column>
                                 

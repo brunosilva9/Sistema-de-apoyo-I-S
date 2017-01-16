@@ -50,13 +50,13 @@ public class IngresoClienteBean implements Serializable {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cliente ingresado exitosamente.", "Cliente ingresado exitosamente.");
                 FacesContext.getCurrentInstance().addMessage(null, message);
             } else {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error, implemento ya existe en base de datos.", "Error, implemento ya existe en base de datos.");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error, Cliente ya existe en base de datos.", "Error, Cliente ya existe en base de datos.");
                 FacesContext.getCurrentInstance().addMessage(null, message);
             }
 
         } catch (Exception e) {
             logger.error("Error grave creando cliente.", e);
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error grave creando cliente.", "Error grave creando implemento.");
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error grave creando cliente.", "Error grave creando Cliente.");
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }

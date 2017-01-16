@@ -20,7 +20,7 @@
                                                 
 
                             <h:outputLabel for="vida_Util" value="Vida util(en dias)(*):" style="font-weight:bold"/>                    
-                            <p:inputText  id="vida_Util" value="#{ingresoImplementoBean.vidaUtil}" required="true"  requiredMessage="la vida util es requerida." label="Vida_Util">
+                            <p:inputText  id="vida_Util" value="#{ingresoImplementoBean.vidaUtil}" required="true"  requiredMessage="la vida util es requerida." label="Vida_Util" onkeypress="if( (event.which &lt; 48 || event.which &gt; 57) ) return false;">
                             </p:inputText>
                             <p:message for="vida_Util" />
 

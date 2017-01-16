@@ -32,16 +32,11 @@ public class CrearDiaTrabajoBean implements Serializable {
 
     private int costoTran;
     private int costoSuper;
-    
+
     private Faena idFaena;
-    
-    
-    
+
     private Date fecha;
-    
-    
-    
-   
+
     public CrearDiaTrabajoBean() {
     }
 
@@ -49,23 +44,24 @@ public class CrearDiaTrabajoBean implements Serializable {
         DiaTrabajo trab = null;
         try {
 
-            
-
-            
-                trab = new DiaTrabajo();
-                trab.setIdDia(0);
-                trab.setIdFaena(this.getIdFaena());
-                trab.setCostoSupervision(this.getCostoSuper());
-                trab.setCostoTransporte(this.getCostoTran());
-                trab.setFechaD(this.getFecha());
-                
-                
-                
-                diaTrabajoFacade.create(trab);
-                this.limpiarValores();
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Dia creado exitosamente.", "Dia creado exitosamente.");
+            if (this.getCostoSuper() <= 0 || this.getCostoTran() <= 0) {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Los datos de costos deben ser mayores a 0", "Error: Los datos de costos deben ser mayores a 0");
                 FacesContext.getCurrentInstance().addMessage(null, message);
-           
+                return;
+            }
+
+            trab = new DiaTrabajo();
+            trab.setIdDia(0);
+            trab.setIdFaena(this.getIdFaena());
+            trab.setCostoSupervision(this.getCostoSuper());
+            trab.setCostoTransporte(this.getCostoTran());
+            trab.setFechaD(this.getFecha());
+
+            diaTrabajoFacade.create(trab);
+            this.limpiarValores();
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Dia creado exitosamente.", "Dia creado exitosamente.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+
         } catch (Exception e) {
             logger.error("Error grave creando Dia.", e);
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error grave creando Dia.", "Error grave creando Dia.");
@@ -77,13 +73,11 @@ public class CrearDiaTrabajoBean implements Serializable {
         try {
             this.setCostoTran(0);
             this.setCostoSuper(0);
-            
+
             this.setIdFaena(null);
-           
+
             this.setFecha(null);
-            
-            
-            
+
         } catch (Exception e) {
             logger.error("Error grave limpiando valores formulario", e);
             throw new RuntimeException(e);
@@ -122,9 +116,4 @@ public class CrearDiaTrabajoBean implements Serializable {
         this.fecha = fecha;
     }
 
-    
-
-
-
-   
 }
