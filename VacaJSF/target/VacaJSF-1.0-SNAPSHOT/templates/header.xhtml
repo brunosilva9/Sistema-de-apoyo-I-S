@@ -10,7 +10,10 @@ and open the template in the editor.
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://java.sun.com/jsf/core">
+    <h:graphicImage library="images" name="img1.png" ></h:graphicImage>
+    
     <p:menubar>
+        <p:menuitem value="Inicio  "  outcome="/index/home.xhtml" icon="ui-icon-star" />
         <p:submenu label="Operaciones Contables" icon="ui-icon-document">
            
                 <p:menuitem value="Pagos Trabajadores" outcome="/pagos/pagoTrabajadores.xhtml" icon="fa fa-money"/>
@@ -50,16 +53,17 @@ and open the template in the editor.
          <p:submenu label="Prestamos" icon="ui-icon-pencil">
            
             <p:menuitem value="Prestar Implemento"  outcome="/prestamos/prestarImp.xhtml" icon="ui-icon-arrowreturnthick-1-w" />
-            
+            <p:menuitem value="Ver Prestamos"  outcome="/prestamos/gestionPrestamos.xhtml" icon="ui-icon-arrowreturnthick-1-w" />
+
         </p:submenu>
         
         
 
-        <p:menuitem value="Quit" url="http://www.primefaces.org" icon="ui-icon-close" />
+        
 
         <f:facet name="options">
             <h:outputText value="Bienvenido: #{loginBean.usuarioSessionado.username}  "/>
-            <p:commandButton value="Logout" icon="ui-icon-extlink" action="#{loginBean.logout}" type="submit" disabled="true"/>
+            <p:commandButton value="Logout" icon="ui-icon-extlink" action="#{loginBean.logout}" type="submit" disabled="false"/>
         </f:facet>
     </p:menubar>
 </ui:composition>

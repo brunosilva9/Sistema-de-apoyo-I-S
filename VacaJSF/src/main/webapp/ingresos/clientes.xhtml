@@ -15,7 +15,7 @@
                         <h:panelGrid id="grid" columns="3"  cellpadding="5">
 
                             <h:outputLabel for="nombre" value="Nombre(*):" style="font-weight:bold"/>                    
-                            <p:inputText id="nombre" value="#{ingresoClienteBean.nombreCliente}" required="true" requiredMessage="El nombre es requerido." label="Nombre"/>
+                            <p:inputText id="nombre" value="#{ingresoClienteBean.nombreCliente}" required="true" onkeypress="if( (event.which === 13 || event.keyCode === 13 )) return false;" requiredMessage="El nombre es requerido." label="Nombre"/>
                             <p:message for="nombre" />
 
 

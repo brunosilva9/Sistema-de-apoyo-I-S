@@ -23,7 +23,7 @@
                                 <p:column headerText="Nombre" filterBy="#{producto.nombre}" filterMatchMode="exact">
                                     <p:cellEditor>
                                         <f:facet name="output"><h:outputText value="#{producto.nombre}"/></f:facet>
-                                        <f:facet name="input"><p:inputText value="#{producto.nombre}" style="width:100%" label="Rut" required="true" requiredMessage="Error: Rut del Trabajador es obligatoria."/></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{producto.nombre}" style="width:100%" onkeypress="if( (event.which === 13 || event.keyCode === 13 )) return false;" label="Rut" required="true" requiredMessage="Error: Rut del Trabajador es obligatoria."/></f:facet>
                                     </p:cellEditor>
                                 </p:column>
                                 <p:column headerText="Valor">

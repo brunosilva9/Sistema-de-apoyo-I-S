@@ -23,13 +23,13 @@
                                 <p:column headerText="Rut" filterBy="#{cliente.rutCliente}" filterMatchMode="exact">
                                     <p:cellEditor>
                                         <f:facet name="output"><h:outputText value="#{cliente.rutCliente}"/></f:facet>
-                                        <f:facet name="input"><p:inputText value="#{cliente.rutCliente}" style="width:100%" label="Rut" required="true" requiredMessage="Error: Rut del Trabajador es obligatoria."/></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{cliente.rutCliente}" style="width:100%" onkeypress="if( (event.which &lt; 48 || event.which &gt; 57) ) return false;" label="Rut" required="true" requiredMessage="Error: Rut del Trabajador es obligatoria."/></f:facet>
                                     </p:cellEditor>
                                 </p:column>
                                 <p:column headerText="Nombre">
                                     <p:cellEditor>
                                         <f:facet name="output"><h:outputText value="#{cliente.nombre}"/></f:facet>
-                                        <f:facet name="input"><p:inputText value="#{cliente.nombre}" style="width:100%" label="Nombre" required="true" requiredMessage="Error: Nombre del Trabajador es obligatoria."/></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{cliente.nombre}" style="width:100%" onkeypress="if( (event.which === 13 || event.keyCode === 13 )) return false;" label="Nombre" required="true" requiredMessage="Error: Nombre del Trabajador es obligatoria."/></f:facet>
                                     </p:cellEditor>
                                 </p:column>
                                 

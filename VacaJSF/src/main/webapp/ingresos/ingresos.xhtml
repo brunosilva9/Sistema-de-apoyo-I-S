@@ -14,15 +14,15 @@
                     <p:panel header="Ingreso nuevo trabajador" style="margin-bottom:20px;font-size: 11px!important;font-family: Verdana, Arial, Helvetica, sans-serif;">
                         <h:panelGrid id="grid" columns="3"  cellpadding="5">
                             <h:outputLabel for="nombre" value="Nombre(*):" style="font-weight:bold"/>                    
-                            <p:inputText id="nombre" value="#{ingresoTrabajadorBean.nombreTrabajador}" required="true" requiredMessage="El nombre es requerido." label="Nombre"/>
+                            <p:inputText id="nombre" value="#{ingresoTrabajadorBean.nombreTrabajador}" onkeypress="if( (event.which === 13 || event.keyCode === 13 )) return false;" required="true" requiredMessage="El nombre es requerido." label="Nombre"/>
                             <p:message for="nombre" />
 
                             <h:outputLabel for="apellido" value="Apellido Paterno(*):" style="font-weight:bold"/>                    
-                            <p:inputText id="apellido" value="#{ingresoTrabajadorBean.apellidoPTrabajador}" required="true" requiredMessage="El apellido es requerido." label="Apellido" />
+                            <p:inputText id="apellido" value="#{ingresoTrabajadorBean.apellidoPTrabajador}" required="true" onkeypress="if( (event.which === 13 || event.keyCode === 13 )) return false;" requiredMessage="El apellido es requerido." label="Apellido" />
                             <p:message for="apellido" />
 
                             <h:outputLabel for="apellidom" value="Apellido Materno(*):" style="font-weight:bold"/>                    
-                            <p:inputText id="apellidom" value="#{ingresoTrabajadorBean.apellidoMTrabajador}" required="true" requiredMessage="El apellido es requerido." label="Apellidom" />
+                            <p:inputText id="apellidom" value="#{ingresoTrabajadorBean.apellidoMTrabajador}" required="true" onkeypress="if( (event.which === 13 || event.keyCode === 13 )) return false;" requiredMessage="El apellido es requerido." label="Apellidom" />
                             <p:message for="apellidom" />                          
 
                             <h:outputLabel for="rut" value="Rut(*):" style="font-weight:bold"/>                    
@@ -37,7 +37,7 @@
                             <p:message for="telefono" />
 
                             <h:outputLabel for="direccion" value="Direccion:" style="font-weight:bold"/>                    
-                            <p:inputText id="direccion" value="#{ingresoTrabajadorBean.direccionTrabajador}" label="Direccion" />
+                            <p:inputText id="direccion" value="#{ingresoTrabajadorBean.direccionTrabajador}" onkeypress="if( (event.which === 13 || event.keyCode === 13 )) return false;" label="Direccion" />
                                
                             <p:message for="direccion" />
 

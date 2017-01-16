@@ -47,6 +47,7 @@ cl\revengers\entities\DiaTrabajo_.class
 cl\revengers\backbeans\GestionImplementosBean.class
 cl\revengers\entities\Prestamo_.class
 cl\revengers\vo\ResumenTrabajoVO.class
+cl\revengers\backbeans\GestionPrestamos.class
 cl\revengers\backbeans\GestionTrabajadoresBean.class
 cl\revengers\entities\Login_.class
 cl\revengers\utils\Constantes.class

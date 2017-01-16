@@ -95,7 +95,7 @@ and open the template in the editor.
         <h:form id="templateForm">
             <p:growl id="messages" showDetail="false" sticky="false" life="5000" />
             <p:layout fullPage="true">
-                <p:layoutUnit position="north" size="50" resizable="false" closable="false" collapsible="false">
+                <p:layoutUnit position="north" size="150" resizable="false" closable="false" collapsible="false">
                     <ui:include src="/templates/header.xhtml"/>
                 </p:layoutUnit>
                 <p:layoutUnit position="south" size="40" resizable="false" closable="false" collapsible="false">
@@ -108,7 +108,7 @@ and open the template in the editor.
                     <h:outputText value="Definir si irá algo en este sector, si no, quitar." />
                 </p:layoutUnit>
                 -->
-                <p:layoutUnit position="center">
+                <p:layoutUnit position="center" >
                     <ui:insert name="content" >
                     </ui:insert>
                 </p:layoutUnit>

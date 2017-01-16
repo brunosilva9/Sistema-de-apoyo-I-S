@@ -14,7 +14,7 @@
                     <p:panel header="Ingreso nuevo producto" style="margin-bottom:20px;font-size: 11px!important;font-family: Verdana, Arial, Helvetica, sans-serif;">
                         <h:panelGrid id="grid" columns="3"  cellpadding="5">
                             <h:outputLabel for="nombre" value="Nombre(*):" style="font-weight:bold"/>                    
-                            <p:inputText id="nombre" value="#{ingresoProductoBean.nombreProducto}" required="true" requiredMessage="El nombre es requerido." label="Nombre"/>
+                            <p:inputText id="nombre" value="#{ingresoProductoBean.nombreProducto}" required="true" onkeypress="if( (event.which === 13 || event.keyCode === 13 )) return false;" requiredMessage="El nombre es requerido." label="Nombre"/>
                             <p:message for="nombre" />
 
                                                 

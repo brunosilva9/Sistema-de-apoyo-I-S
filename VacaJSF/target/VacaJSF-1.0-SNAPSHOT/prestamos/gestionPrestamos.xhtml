@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/templates/commonTemplate.xhtml">
+        <ui:define name="content">
+            <h:body>
+                <h:form id="formGrillaClie">
+                    <p:growl id="mensajePantallaGrilla" showDetail="false" sticky="false" life="5000" /> 
+                    <p:panel header="Gestion de Prestamos" style="margin-bottom:20px;font-size: 11px!important;font-family: Verdana, Arial, Helvetica, sans-serif;">
+                        <h:panelGrid id="grid" columns="1">
+                            <p:dataTable id="clientesGrid" var="prestamo" value="#{gestionPrestamos.listaP}" editable="true" style="margin-bottom:20px" rowKey="#{prestamo.idImp}" selectionMode="single" selection="#{gestionPrestamos.implementoSeleccionado}">
+                                <f:facet name="header">
+                                    Lista de Prestamos
+                                </f:facet>
+                                <p:ajax event="rowEdit" listener="#{gestionPrestamos.onRowEdit}" update=":templateForm:formGrillaClie:mensajePantallaGrilla"/>
+                                <p:column headerText="Id" width="3%">
+                                    <h:outputText value="#{prestamo.idPrestamo}"/>
+                                </p:column>
+                                <p:column headerText="Nombre Trabajador" filterBy="#{prestamo.idTraba.nombre} #{prestamo.idTraba.apellidoM}" filterMatchMode="contains">
+                                    <h:outputText value="#{prestamo.idTraba.nombre} #{prestamo.idTraba.apellidoM}"/>
+                                       
+                                    
+                                </p:column>
+                                
+                                <p:column headerText="Nombre implemento" filterBy="#{prestamo.idImp.nombre}" filterMatchMode="exact">
+                                   
+                                    <h:outputText value="#{prestamo.idImp.nombre}"/>
+                                        
+                                </p:column>
+                                
+                                <p:column headerText="Vida util">
+                                    
+                                      <h:outputText value="#{prestamo.idImp.vidaUtil}"/>
+                                        
+                                </p:column>
+                                
+                               <p:column headerText="Fecha Prestamo">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{prestamo.fechaPrestamo}"><f:convertDateTime pattern="dd-MM-yyyy"/></h:outputText></f:facet>
+                                        <f:facet name="input"><p:calendar id="txtFechNac" value="#{prestamo.fechaPrestamo}" timeZone="Chile/Continental"  pattern="dd-MM-yyyy" mask="true" required="true" requiredMessage="Error: La fecha del prestamo es obligatoria." /></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                
+                               
+                             
+                              
+                              
+                                
+                                <p:column style="width:32px" headerText="Editar">
+                                    <p:rowEditor />
+                                </p:column>
+                            </p:dataTable>
+                        </h:panelGrid>
+                        <h:panelGrid>
+                            <p:commandButton value="Eliminar prestamo" actionListener="#{gestionImplementosBean.eliminarImplemento}" update=":templateForm:formGrillaClie:mensajePantallaGrilla, clientesGrid" style="margin-right: 20px" icon="ui-icon-close">
+                                <p:confirm header="Confirmación" message="¿Está seguro que desea eliminar este prestamo?" icon="ui-icon-alert" />
+                            </p:commandButton>
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" style="margin-bottom:20px;font-size: 11px!important;font-family: Verdana, Arial, Helvetica, sans-serif;">
+                                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                        </h:panelGrid>
+                    </p:panel>
+                </h:form>
+            </h:body>
+        </ui:define>
+    </ui:composition>
+</html>

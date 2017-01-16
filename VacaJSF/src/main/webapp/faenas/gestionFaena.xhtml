@@ -32,14 +32,14 @@
                                 <p:column headerText="Ubicacion">
                                     <p:cellEditor>
                                         <f:facet name="output"><h:outputText value="#{faena.ubicacion}"/></f:facet>
-                                        <f:facet name="input"><p:inputText value="#{faena.ubicacion}" style="width:100%" label="Nombre" required="true" requiredMessage="Error: Nombre de la faena es obligatoria."/></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{faena.ubicacion}" style="width:100%" onkeypress="if( (event.which === 13 || event.keyCode === 13 )) return false;" label="Nombre" required="true" requiredMessage="Error: Nombre de la faena es obligatoria."/></f:facet>
                                     </p:cellEditor>
                                 </p:column>
                                 
                                  <p:column headerText="Descripcion">
                                     <p:cellEditor>
                                         <f:facet name="output"><h:outputText value="#{faena.descripcion}"/></f:facet>
-                                        <f:facet name="input"><p:inputText value="#{faena.descripcion}" style="width:100%" label="Nombre" required="true" requiredMessage="Error: Nombre de la faena es obligatoria."/></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{faena.descripcion}" style="width:100%" onkeypress="if( (event.which === 13 || event.keyCode === 13 )) return false;" label="Nombre" required="true" requiredMessage="Error: Nombre de la faena es obligatoria."/></f:facet>
                                     </p:cellEditor>
                                 </p:column>
                                 <p:column headerText="Fecha inicio" filterBy="#{faena.fechIni}" filterMatchMode="contains">
