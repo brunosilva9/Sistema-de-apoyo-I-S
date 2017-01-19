@@ -39,7 +39,7 @@
                                 <p:column headerText="Fecha" filterBy="#{diaTrabajo.fechaD}" filterMatchMode="contains">
                                     <p:cellEditor>
                                         <f:facet name="output"><h:outputText value="#{diaTrabajo.fechaD}"><f:convertDateTime pattern="dd-MM-yyyy"/></h:outputText></f:facet>
-                                        <f:facet name="input"><p:calendar id="txtFechNac" value="#{diaTrabajo.fechaD}" timeZone="Chile/Continental" pattern="dd-MM-yyyy" mask="true" required="true" requiredMessage="Error: La fecha de inicio es obligatoria." /></f:facet>
+                                        <f:facet name="input"><p:calendar id="txtFechNac" value="#{diaTrabajo.fechaD}" timeZone="Argentina/Continental" pattern="dd-MM-yyyy" mask="true" required="true" requiredMessage="Error: La fecha de inicio es obligatoria." /></f:facet>
                                     </p:cellEditor>
                                 </p:column>
                                 

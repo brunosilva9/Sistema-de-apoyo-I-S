@@ -41,7 +41,7 @@
                                <p:column headerText="Fecha Prestamo">
                                     <p:cellEditor>
                                         <f:facet name="output"><h:outputText value="#{prestamo.fechaPrestamo}"><f:convertDateTime pattern="dd-MM-yyyy"/></h:outputText></f:facet>
-                                        <f:facet name="input"><p:calendar id="txtFechNac" value="#{prestamo.fechaPrestamo}" timeZone="Chile/Continental"  pattern="dd-MM-yyyy" mask="true" required="true" requiredMessage="Error: La fecha del prestamo es obligatoria." /></f:facet>
+                                        <f:facet name="input"><p:calendar id="txtFechNac" value="#{prestamo.fechaPrestamo}" timeZone="Argentina/Continental" pattern="dd-MM-yyyy" mask="true" required="true" requiredMessage="Error: La fecha del prestamo es obligatoria." /></f:facet>
                                     </p:cellEditor>
                                 </p:column>
                                 

@@ -46,8 +46,8 @@
                                 </p:column>
                                 <p:column headerText="Fecha Nacimiento">
                                     <p:cellEditor>
-                                        <f:facet name="output"><h:outputText value="#{trabajador.fechNac}"><f:convertDateTime pattern="dd-MM-yyyy"/></h:outputText></f:facet>
-                                        <f:facet name="input"><p:calendar id="txtFechNac" value="#{trabajador.fechNac}" timeZone="Chile/Continental"  pattern="dd-MM-yyyy" mask="true" required="true" requiredMessage="Error: La fecha de nacimiento del Trabajador es obligatoria." /></f:facet>
+                                        <f:facet name="output"><h:outputText value="#{trabajador.fechNac}"><f:convertDateTime  pattern="dd-MM-yyyy"/></h:outputText></f:facet>
+                                        <f:facet name="input"><p:calendar id="txtFechNac" value="#{trabajador.fechNac}" timeZone="Argentina/Continental"  pattern="dd-MM-yyyy" mask="true" required="true" requiredMessage="Error: La fecha de nacimiento del Trabajador es obligatoria." /></f:facet>
                                     </p:cellEditor>
                                 </p:column>
                                 <p:column headerText="Prevision">
